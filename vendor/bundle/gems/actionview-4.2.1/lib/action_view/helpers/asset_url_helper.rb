@@ -29,7 +29,7 @@ module ActionView
     #   image_tag("rails.png")
     #   # => <img alt="Rails" src="http://assets.example.com/assets/rails.png" />
     #   stylesheet_link_tag("application")
-    #   # => <link href="http://assets.example.com/assets/application.css" media="screen" rel="stylesheet" />
+    #   # => <link href="http://assets.example.com/assets/application.css.scss" media="screen" rel="stylesheet" />
     #
     # Browsers typically open at most two simultaneous connections to a single
     # host, which means your assets often have to wait for other assets to finish
@@ -42,7 +42,7 @@ module ActionView
     #   image_tag("rails.png")
     #   # => <img alt="Rails" src="http://assets0.example.com/assets/rails.png" />
     #   stylesheet_link_tag("application")
-    #   # => <link href="http://assets2.example.com/assets/application.css" media="screen" rel="stylesheet" />
+    #   # => <link href="http://assets2.example.com/assets/application.css.scss" media="screen" rel="stylesheet" />
     #
     # To do this, you can either setup four actual hosts, or you can use wildcard
     # DNS to CNAME the wildcard to a single asset host. You can read more about
@@ -61,7 +61,7 @@ module ActionView
     #   image_tag("rails.png")
     #   # => <img alt="Rails" src="http://assets1.example.com/assets/rails.png" />
     #   stylesheet_link_tag("application")
-    #   # => <link href="http://assets2.example.com/assets/application.css" media="screen" rel="stylesheet" />
+    #   # => <link href="http://assets2.example.com/assets/application.css.scss" media="screen" rel="stylesheet" />
     #
     # The example above generates "http://assets1.example.com" and
     # "http://assets2.example.com". This option is useful for example if
@@ -80,7 +80,7 @@ module ActionView
     #   image_tag("rails.png")
     #   # => <img alt="Rails" src="http://assets.example.com/assets/rails.png" />
     #   stylesheet_link_tag("application")
-    #   # => <link href="http://stylesheets.example.com/assets/application.css" media="screen" rel="stylesheet" />
+    #   # => <link href="http://stylesheets.example.com/assets/application.css.scss" media="screen" rel="stylesheet" />
     #
     # Alternatively you may ask for a second parameter +request+. That one is
     # particularly useful for serving assets from an SSL-protected page. The
@@ -118,7 +118,7 @@ module ActionView
       #
       #   asset_path "application.js"                     # => /assets/application.js
       #   asset_path "application", type: :javascript     # => /assets/application.js
-      #   asset_path "application", type: :stylesheet     # => /assets/application.css
+      #   asset_path "application", type: :stylesheet     # => /assets/application.css.scss
       #   asset_path "http://www.example.com/js/xmlhr.js" # => http://www.example.com/js/xmlhr.js
       def asset_path(source, options = {})
         source = source.to_s
