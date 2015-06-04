@@ -14,7 +14,7 @@ p
         code
           - trace.each do |frame|
             a.trace-frames data-frame-id="#{frame[:id]}", href: "#" = frame[:trace]
-            br/
+            br
   javascript:
     | var traceFrames = document.getElementsByClassName('trace-frames');
     | var selectedFrame, currentSource = document.getElementById('frame-source-0');
