@@ -6,5 +6,10 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   body
-    = link_to "Sign Out", destroy_user_session_url, method: :delete
+    - if user_signed_in?
+      = link_to "Sign Out", destroy_user_session_url, method: :delete
+    - else
+      = link_to "Sign In", new_user_session_url
+    br
+
     = yield
