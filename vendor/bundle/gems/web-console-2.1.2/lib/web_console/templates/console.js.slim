@@ -1,0 +1,25 @@
+| \// DOM helpers
+| function hasClass(el, className) {
+| var regex = new RegExp('(?:^|\\s)' + className + '(?!\\S)', 'g');
+| return el.className.match(regex);
+| }
+
+| function addClass(el, className) {
+| el.className += " " + className;
+| }
+
+| function removeClass(el, className) {
+| var regex = new RegExp('(?:^|\\s)' + className + '(?!\\S)', 'g');
+| el.className = el.className.replace(regex, '');
+| }
+
+| function removeAllChildren(el) {
+| while (el.firstChild) {
+| el.removeChild(el.firstChild);
+| }
+| }
+
+| function escapeHTML(html) {
+| return html
+| \.replace(//g, '')
+| \.replace(/

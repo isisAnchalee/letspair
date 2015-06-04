@@ -1,0 +1,22 @@
+p#notice %= notice %&gt;
+h1
+  | Listing #{plural_table_name.titleize}
+table
+  thead
+    tr
+      - attributes.reject(:password_digest?).each do |attribute|
+        th= attribute.human_name
+      th colspan: "3" 
+  tbody
+    | \% @%= plural_table_name %&gt;.each do |#{singular_table_name}| %&gt;
+    tr
+      - attributes.reject(:password_digest?).each do |attribute|
+        td
+          | \%= %= singular_table_name %&gt;.#{attribute.name} %&gt;
+      td %= link_to 'Show', %= singular_table_name %&gt; %&gt;
+      td
+        | \%= link_to 'Edit', edit_%= singular_table_name %&gt;_path(#{singular_table_name}) %&gt;
+      td %= link_to 'Destroy', %= singular_table_name %&gt;, method: :delete, data:   confirm: 'Are you sure?'   %&gt;
+    | \% end %&gt;
+br
+  | \%= link_to 'New %= human_name %&gt;', new_#{singular_table_name}_path %&gt;

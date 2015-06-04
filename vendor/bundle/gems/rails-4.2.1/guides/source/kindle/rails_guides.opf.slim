@@ -1,0 +1,32 @@
+doctype XML
+package unique-identifier="RailsGuides", version: "2.0", xmlns: "http://www.idpf.org/2007/opf" 
+  metadata
+    meta content: "cover", name: "cover" /
+    dc-metadata xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      title
+        | Ruby on Rails Guides (#{@version})
+      language en-us
+      creator Ruby on Rails
+      publisher Ruby on Rails
+      subject Reference
+      date= Time.now.strftime('%Y-%m-%d')
+      description These guides are designed to make you immediately productive with Rails, and to help you understand how all of the pieces fit together.
+    x-metadata
+      output content-type="application/x-mobipocket-subscription-magazine", encoding: "utf-8" 
+  manifest
+    /! HTML content files [mandatory]
+    - documents_flat.each do |document|
+      item href: "#{document['url']}", id: "#{document['url']}" media-type="text/html" 
+    - %w{toc.html credits.html welcome.html copyright.html}.each do |url|
+      item href: url, id: url media-type="text/html" 
+    item#toc href: "toc.ncx" media-type="application/x-dtbncx+xml" 
+    item#cover href: "images/rails_guides_kindle_cover.jpg" media-type="image/jpg" 
+  spine toc: "toc" 
+    itemref idref: "toc.html" 
+    itemref idref: "welcome.html" 
+    itemref idref: "credits.html" 
+    itemref idref: "copyright.html" 
+    - documents_flat.each do |document|
+      itemref idref: "#{document['url']}" 
+  guide
+    reference href: "toc.html", title: "Table of Contents", type: "toc" 

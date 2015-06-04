@@ -1,0 +1,7 @@
+- unless @exception.blamed_files.blank?
+  - if (hide = @exception.blamed_files.length > 8)
+    a href: "#", onclick: "return toggleTrace()"  Toggle blamed files
+  pre#blame_trace
+  = 'style=display:none' if hide
+  | \&gt;
+  code= @exception.describe_blame

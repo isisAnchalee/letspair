@@ -1,0 +1,11 @@
+tr.route_row data-helper="path" 
+  td data-route-name="#{route[:name]}" 
+    - if route[:name].present?
+      = route[:name]
+      span.helper _path
+  td data-route-verb="#{route[:verb]}" 
+    = route[:verb]
+  td data-regexp="#{route[:regexp]}" data-route-path="#{route[:path]}" 
+    = route[:path]
+  td data-route-reqs="#{route[:reqs]}" 
+    = route[:reqs]

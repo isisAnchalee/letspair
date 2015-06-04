@@ -1,0 +1,112 @@
+doctype html
+html lang: "en" xml:lang="en", xmlns: "http://www.w3.org/1999/xhtml" 
+  head
+    meta content: "text/html; charset=utf-8" http-equiv="Content-Type" /
+    meta content: "width=device-width, initial-scale=1", name: "viewport" /
+    title= yield(:page_title) || 'Ruby on Rails Guides'
+    link href: "stylesheets/style.css", rel: "stylesheet", type: "text/css" /
+    link href: "stylesheets/print.css", media: "print", rel: "stylesheet", type: "text/css" /
+    link href: "stylesheets/syntaxhighlighter/shCore.css", rel: "stylesheet", type: "text/css" /
+    link href: "stylesheets/syntaxhighlighter/shThemeRailsGuides.css", rel: "stylesheet", type: "text/css" /
+    link href: "stylesheets/fixes.css", rel: "stylesheet", type: "text/css" /
+    link href: "images/favicon.ico", rel: "shortcut icon", type: "image/x-icon" /
+  body.guide
+    - if @edge
+      div
+        img#edge-badge alt: "edge-badge", src: "images/edge_badge.png" /
+    #topNav
+      .wrapper
+        strong.more-info-label
+          | More at
+          a href: "http://rubyonrails.org/"  rubyonrails.org:
+        span.red-button.more-info-button
+          | More Ruby on Rails
+        ul.more-info-links.s-hidden
+          li.more-info
+            a href: "http://rubyonrails.org/"  Overview
+          li.more-info
+            a href: "http://rubyonrails.org/download"  Download
+          li.more-info
+            a href: "http://rubyonrails.org/deploy"  Deploy
+          li.more-info
+            a href: "https://github.com/rails/rails"  Code
+          li.more-info
+            a href: "http://rubyonrails.org/screencasts"  Screencasts
+          li.more-info
+            a href: "http://rubyonrails.org/documentation"  Documentation
+          li.more-info
+            a href: "http://rubyonrails.org/community"  Community
+          li.more-info
+            a href: "http://weblog.rubyonrails.org/"  Blog
+    #header
+      .wrapper.clearfix
+        h1
+          a href: "index.html", title: "Return to home page"  Guides.rubyonrails.org
+        ul.nav
+          li
+            a.nav-item href: "index.html"  Home
+          li.guides-index.guides-index-large
+            a#guidesMenu.guides-index-item.nav-item href: "index.html"  Guides Index
+            #guides.clearfix style: "display: none;" 
+              hr/
+              - ['L', 'R'].each do |position|
+                dl class: position 
+                  - docs_for_menu(position).each do |section|
+                    dt= section['name']
+                    - finished_documents(section['documents']).each do |document|
+                      dd
+                        a href: "#{document['url']}" = document['name']
+          li
+            a.nav-item href: "contributing_to_ruby_on_rails.html"  Contribute
+          li
+            a.nav-item href: "credits.html"  Credits
+          li.guides-index.guides-index-small
+            select.guides-index-item.nav-item
+              option value: "index.html"  Guides Index
+              - docs_for_menu.each do |section|
+                optgroup label: "#{section['name']}" 
+                  - finished_documents(section['documents']).each do |document|
+                    option value: "#{document['url']}" = document['name']
+    hr.hide/
+    #feature
+      .wrapper
+        = yield :header_section
+        = yield :index_section
+    #container
+      .wrapper
+        #mainCol
+          = yield.html_safe
+          h3 Feedback
+          p
+            | You're encouraged to help improve the quality of this guide.
+          p
+            | Please contribute if you see any typos or factual errors.
+            | To get started, you can read our #{link_to 'documentation contributions', 'http://edgeguides.rubyonrails.org/contributing_to_ruby_on_rails.html#contributing-to-the-rails-documentation'} section.
+          p
+            | You may also find incomplete content, or stuff that is not up to date.
+            | Please do add any missing documentation for master. Make sure to check
+            | \#{link_to 'Edge Guides','http://edgeguides.rubyonrails.org'} first to verify
+            | if the issues are already fixed or not on the master branch.
+            | Check the #{link_to 'Ruby on Rails Guides Guidelines', 'ruby_on_rails_guides_guidelines.html'}
+            | for style and conventions.
+          p
+            | If for whatever reason you spot something to fix but cannot patch it yourself, please
+            | \#{link_to 'open an issue', 'https://github.com/rails/rails/issues'}.
+          p
+            | And last but not least, any kind of discussion regarding Ruby on Rails
+            | documentation is very welcome in the #{link_to 'rubyonrails-docs mailing list', 'http://groups.google.com/group/rubyonrails-docs'}.
+    hr.hide/
+    #footer
+      .wrapper
+        = render 'license'
+    script src: "javascripts/jquery.min.js", type: "text/javascript" 
+    script src: "javascripts/responsive-tables.js", type: "text/javascript" 
+    script src: "javascripts/guides.js", type: "text/javascript" 
+    script src: "javascripts/syntaxhighlighter/shCore.js", type: "text/javascript" 
+    script src: "javascripts/syntaxhighlighter/shBrushRuby.js", type: "text/javascript" 
+    script src: "javascripts/syntaxhighlighter/shBrushXml.js", type: "text/javascript" 
+    script src: "javascripts/syntaxhighlighter/shBrushSql.js", type: "text/javascript" 
+    script src: "javascripts/syntaxhighlighter/shBrushPlain.js", type: "text/javascript" 
+    javascript:
+      | SyntaxHighlighter.all();
+      | $(guidesIndex.bind);

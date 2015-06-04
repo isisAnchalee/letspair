@@ -1,0 +1,16 @@
+doctype Strict
+html
+  head
+    meta content: "text/html; charset=UTF-8" http-equiv="Content-Type" /
+    title Devise Test App
+  body
+    #container
+      - flash.each do |name, msg|
+        = content_tag :div, msg, id: "flash_#{name}"
+      - if user_signed_in?
+        p
+          | Hello User #{current_user.email}! You are signed in!
+      - if admin_signed_in?
+        p
+          | Hello Admin #{current_admin.email}! You are signed in!
+      = yield

@@ -1,0 +1,14 @@
+doctype Strict
+html lang: "en" xml:lang="en", xmlns: "http://www.w3.org/1999/xhtml" 
+  head
+    meta content: "text/html; charset=utf-8" http-equiv="Content-Type" /
+    title= yield(:page_title) || 'Ruby on Rails Guides'
+    link href: "stylesheets/kindle.css", rel: "stylesheet", type: "text/css" /
+  body.guide
+    - if content_for? :header_section
+      = yield :header_section
+      .pagebreak
+        - if content_for? :index_section
+          = yield :index_section
+          .pagebreak
+            = yield.html_safe

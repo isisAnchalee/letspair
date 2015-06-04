@@ -1,0 +1,45 @@
+doctype 2005-1
+doctype XML
+html
+  body
+    ncx version: "2005-1" xml:lang="en-US", xmlns: "http://www.daisy.org/z3986/2005/ncx/" 
+      meta content: "RailsGuides", name: "dtb:uid" /
+      meta content: "2", name: "dtb:depth" /
+      meta content: "0", name: "dtb:totalPageCount" /
+      meta content: "0", name: "dtb:maxPageNumber" /
+      doctitle
+        text Ruby on Rails Guides
+      docauthor
+        text docrails
+      navmap
+        navpoint#periodical.periodical playorder: "0" 
+          navlabel
+            text Table of Contents
+          content src: "toc.html" 
+          navpoint#welcome.section playorder: "1" 
+            navlabel
+              text Introduction
+            content src: "welcome.html" 
+            navpoint#welcome.article playorder: "2" 
+              navlabel
+                text Welcome
+              content src: "welcome.html" 
+            navpoint#credits.article playorder: "3" 
+              navlabel
+                text Credits
+              content src: "credits.html" 
+            navpoint#copyright.article playorder: "4" 
+              navlabel
+                text Copyright &amp; License
+              content src: "copyright.html" 
+          - play_order = 4
+          - documents_by_section.each_with_index do |section, section_no|
+            navpoint.section id: "chapter_#{section_no + 1}", playorder: "play_order +=1" 
+              navlabel
+                text= section['name']
+              content src: "#{section['documents'].first['url']}" 
+              - section['documents'].each_with_index do |document, document_no|
+                navpoint.article id: "_#{section_no+1}.#{document_no+1}", playorder: "#{play_order +=1}" 
+                  navlabel
+                    text= document['name']
+                  content src: "#{document['url']}" 

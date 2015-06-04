@@ -1,0 +1,9 @@
+p#notice %= notice %&gt;
+- attributes.reject(:password_digest?).each do |attribute|
+  p
+    strong
+      = attribute.human_name
+      | \:
+    | \%= @%= singular_table_name %&gt;.#{attribute.name} %&gt;
+\%= link_to 'Edit', edit_%= singular_table_name %&gt;_path(@#{singular_table_name}) %&gt; \
+| \%= link_to 'Back', %= index_helper %&gt;_path %&gt;

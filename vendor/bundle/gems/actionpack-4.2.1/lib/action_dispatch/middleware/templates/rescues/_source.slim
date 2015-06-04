@@ -1,0 +1,19 @@
+- @source_extracts.each_with_index do |source_extract, index|
+  - if source_extract[:code]
+    div class: "source #{"hidden" if @show_source_idx != index}", id: "frame-source-#{index}" 
+      .info
+        | Extracted source (around line
+        = succeed "):" do
+          strong
+            | \##{source_extract[:line_number]}
+      .data
+        table.lines cellpadding: "0", cellspacing: "0" 
+          tr
+            td
+              pre.line_numbers
+                - source_extract[:code].each_key do |line_number|
+                  span= line_number
+            td width: "100%" 
+              pre
+                - source_extract[:code].each do |line, source|
+                  div class: "line#{" active" if line == source_extract[:line_number]}" = source

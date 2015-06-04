@@ -1,0 +1,21 @@
+body
+  header
+    h1 Routing Error
+  #container
+    h2= h @exception.message
+    - unless @exception.failures.empty?
+      p
+      h2 Failure reasons:
+      ol
+        - @exception.failures.each do |route, reason|
+          li
+            code= route.inspect.delete('\\')
+            | failed because #{reason.downcase}
+    = render template: "rescues/_trace"
+    - if @routes_inspector
+      h2
+        | Routes
+      p
+        | Routes match in priority from top to bottom
+      = @routes_inspector.format(ActionDispatch::Routing::HtmlTableFormatter.new(self))
+    = render template: "rescues/_request_and_response"

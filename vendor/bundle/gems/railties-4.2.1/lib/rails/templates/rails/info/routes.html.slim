@@ -1,0 +1,5 @@
+h2
+  | Routes
+p
+  | Routes match in priority from top to bottom
+= @routes_inspector.format(ActionDispatch::Routing::HtmlTableFormatter.new(self))

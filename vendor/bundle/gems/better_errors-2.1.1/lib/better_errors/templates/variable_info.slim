@@ -1,0 +1,59 @@
+body
+  header.trace_info.clearfix
+    .title
+      h2.name= @frame.name
+      .location
+        span.filename
+          a href: "#{editor_url(@frame)}" = @frame.pretty_path
+    .code_block.clearfix
+      == html_formatted_code_block @frame
+    - if BetterErrors.binding_of_caller_available? && @frame.frame_binding
+      .repl
+        .console
+          pre
+          .prompt
+            span &gt;&gt;
+            input/
+  - if BetterErrors.binding_of_caller_available? && @frame.frame_binding
+    .hint
+      | This is a live shell. Type in here.
+    .variable_info
+  - unless BetterErrors.binding_of_caller_available?
+    .hint
+      strong Tip:
+      | add
+      code gem "binding_of_caller"
+      | to your Gemfile to enable the REPL and local/instance variable inspection.
+  .sub
+    h3 Request info
+    .inset.variables
+      table.var_table
+        - if rails_params
+          tr
+            td.name Request parameters
+            td
+              pre== inspect_value rails_params
+        - if rack_session
+          tr
+            td.name Rack session
+            td
+              pre== inspect_value rack_session
+  .sub
+    h3 Local Variables
+    .inset.variables
+      table.var_table
+        - @frame.local_variables.each do |name, value|
+          tr
+            td.name= name
+            td
+              pre== inspect_value value
+  .sub
+    h3 Instance Variables
+    .inset.variables
+      table.var_table
+        - @frame.instance_variables.each do |name, value|
+          tr
+            td.name= name
+            td
+              pre== inspect_value value
+  /! <haml_loud> Time.now.to_f - @var_start_time </haml_loud> seconds

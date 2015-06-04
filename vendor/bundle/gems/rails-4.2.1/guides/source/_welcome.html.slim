@@ -1,0 +1,28 @@
+h2
+  | Ruby on Rails Guides (#{@edge ? @version[0, 7] : @version})
+- if @edge
+  p
+    | These are
+    = succeed "," do
+      b Edge Guides
+    a href: "https://github.com/rails/rails/tree/#{@version}"  master
+    | branch.
+  p
+    | If you are looking for the ones for the stable version, please check
+    a href: "http://guides.rubyonrails.org"  http://guides.rubyonrails.org
+    | instead.
+- else
+  p
+    | These are the new guides for Rails 4.2 based on
+    = succeed "." do
+      a href: "https://github.com/rails/rails/tree/#{@version}" = @version
+p
+  | The guides for earlier releases:
+  = succeed "," do
+    a href: "http://guides.rubyonrails.org/v4.1.8/"  Rails 4.1.8
+  = succeed "," do
+    a href: "http://guides.rubyonrails.org/v4.0.12/"  Rails 4.0.12
+  a href: "http://guides.rubyonrails.org/v3.2.21/"  Rails 3.2.21
+  | and
+  = succeed "." do
+    a href: "http://guides.rubyonrails.org/v2.3.11/"  Rails 2.3.11

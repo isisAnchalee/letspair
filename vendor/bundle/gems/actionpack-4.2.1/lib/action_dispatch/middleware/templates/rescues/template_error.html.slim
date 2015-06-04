@@ -1,0 +1,20 @@
+body
+  header
+    h1
+      = @exception.original_exception.class.to_s
+      | in
+      | \#{@request.parameters["controller"].camelize if @request.parameters["controller"]}##{@request.parameters["action"]}
+  #container
+    p
+      | Showing
+      i= @exception.file_name
+      | where line
+      b
+        | \##{@exception.line_number}
+      | raised:
+    pre
+      code= h @exception.message
+    = render template: "rescues/_source"
+    p= @exception.sub_template_message
+    = render template: "rescues/_trace"
+    = render template: "rescues/_request_and_response"

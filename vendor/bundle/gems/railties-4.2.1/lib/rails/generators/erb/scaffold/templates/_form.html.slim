@@ -1,0 +1,27 @@
+| \%= form_for(@%= singular_table_name %&gt;) do |f| %&gt;
+| \% if @%= singular_table_name %&gt;.errors.any? %&gt;
+#error_explanation
+  h2
+    | \%= pluralize(@%= singular_table_name %&gt;.errors.count, "error") %&gt; prohibited this #{singular_table_name} from being saved:
+  ul
+    | \% @%= singular_table_name %&gt;.errors.full_messages.each do |message| %&gt;
+    li %= message %&gt;
+    | \% end %&gt;
+| \% end %&gt;
+- attributes.each do |attribute|
+  .field
+    - if attribute.password_digest?
+      | \%= f.label :password %&gt;
+      br
+        | \%= f.password_field :password %&gt;
+      .field
+        | \%= f.label :password_confirmation %&gt;
+        br
+          | \%= f.password_field :password_confirmation %&gt;
+        - else
+          | \%= f.label :%= attribute.column_name %&gt; %&gt;
+          br
+            | \%= f.%= attribute.field_type %&gt; :#{attribute.column_name} %&gt;
+      .actions
+        | \%= f.submit %&gt;
+      | \% end %&gt;
