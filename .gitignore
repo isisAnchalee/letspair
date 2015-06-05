@@ -1,3 +1,20 @@
 /.idea/*
 /tmp/*
 /log/*
+vendor/bundle*
+.bundle*
+tmp/**/*
+
+# Local configuration
+config/database.yml
+config/events_database.yml
+config/session_keys.yml
+config/shard.yml
+config/localhost.crt
+config/localhost.key
+config/airbrake.yml
+config/redis.yml
+config/api_routes.yml
+config/active_cache.yml
+vendor/assets/bower_components
+log/development.log
