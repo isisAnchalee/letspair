@@ -1,6 +1,7 @@
 nav class=["navbar navbar-inverse navbar-fixed"]
   div class=["pull-left"] 
-    span class=["logo-text"] LetsPa.ir
+    = link_to root_url do
+        span class=["logo-text"] LetsPa.ir
   div class=["pull-right"]
     span class=["sign-out"]
       - if user_signed_in?

@@ -6,6 +6,10 @@
   letter-spacing: 2px;
 }
 
+a:hover{
+  text-decoration: none !important;
+}
+
 span.sign-out{
   line-height: 50px;
   padding-right: 40px;
@@ -22,6 +26,13 @@ span.sign-out{
   border-right: 1px solid #CCCCCC;
 }
 
+.sidebar-content{
+  margin-top: 70px;
+}
+
+.sidebar-content li{
+  padding: 3px 0;
+}
 .main-body{
   width: 700px;
   margin-left: 270px;

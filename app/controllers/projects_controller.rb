@@ -1,5 +1,10 @@
 class ProjectsController < ApplicationController
 
+  def index
+    @projects = Project.all.includes(:author)
+    render :index
+  end
+
   def new
     @project = Project.new
     render :new
@@ -18,9 +23,9 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def index
-    @projects = Project.all.includes(:author)
-    render :index
+  def show
+    @project = Project.find(params[:id])
+    render :show
   end
 
   private
