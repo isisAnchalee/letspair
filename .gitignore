@@ -17,3 +17,4 @@ config/redis.yml
 config/api_routes.yml
 config/active_cache.yml
 vendor/assets/bower_components
+log/development.log
