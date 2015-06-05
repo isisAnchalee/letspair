@@ -1,13 +1,13 @@
 class ProjectsController < ApplicationController
 
 	def index
-		@project = Project.all.includes(:user)
+		@projects = Project.all.includes(:user)
 		render :index
 	end
 
 	private
 
-  def photo_params
+  def project_params
     params.require(:project).permit(:title, :description)
   end
 end

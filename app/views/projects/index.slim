@@ -1,1 +1,7 @@
 p meeow!!
+
+- @projects.each do |project|
+  ul
+    li = "Title: " + project.title
+    li = "Author: " + project.user.username
+    li = "Description: " + project.description

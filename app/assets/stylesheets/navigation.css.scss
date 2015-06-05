@@ -1,0 +1,28 @@
+.logo-text{
+  font-size: 18px;
+  color: white;
+  line-height: 50px;
+  padding-left: 40px;
+  letter-spacing: 2px;
+}
+
+span.sign-out{
+  line-height: 50px;
+  padding-right: 40px;
+  text-decoration: none;
+}
+
+.sidebar{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 250px;
+  background: #F5F5F5;
+  border-right: 1px solid #CCCCCC;
+}
+
+.main-body{
+  width: 700px;
+  margin-left: 270px;
+}
