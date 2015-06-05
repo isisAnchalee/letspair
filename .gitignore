@@ -2,7 +2,8 @@
 /tmp/*
 /log/*
 vendor/bundle*
-.bundle
+.bundle*
+tmp/**/*
 
 # Local configuration
 config/database.yml
