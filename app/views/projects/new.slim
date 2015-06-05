@@ -1,0 +1,12 @@
+div class=["new-project-form"]
+  = form_for (@project) do |f|
+    div class=["form-group"]
+      = f.label :Title
+      = f.text_field :title, :class => "form-control"
+    div class=["form-group"]
+      = f.label :description
+      = f.text_area :description, :class => "form-control"
+    div class=["form-group"]
+      = f.label :complexity
+      = f.text_area :complexity, :class => "form-control"
+    = f.submit
