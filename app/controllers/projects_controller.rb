@@ -1,7 +1,11 @@
 class ProjectsController < ApplicationController
 
   def index
-    @projects = Project.all.includes(:author)
+    if params[:tag]
+      @projects = Project.tagged_with(params[:tag]).includes(:author)
+    else
+      @projects = Project.all.includes(:author)
+    end
     render :index
   end
 
@@ -31,6 +35,6 @@ class ProjectsController < ApplicationController
   private
 
   def project_params
-    params.require(:project).permit(:title, :description, :complexity)
+    params.require(:project).permit(:title, :description, :complexity, :tag_list)
   end
 end

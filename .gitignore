@@ -5,6 +5,7 @@ vendor/bundle*
 .bundle*
 tmp/**/*
 
+tmp/cache/assets/*
 # Local configuration
 config/database.yml
 config/events_database.yml

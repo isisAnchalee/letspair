@@ -8,6 +8,8 @@ class Project < ActiveRecord::Base
     :primary_key => :id
   )
 
+  acts_as_taggable
+
  def price_dollars
     self.price.to_f / 100
   end
@@ -15,4 +17,5 @@ class Project < ActiveRecord::Base
   def price_dollars=(val)
     self.price = val * 100
   end
+  
 end
