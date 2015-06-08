@@ -4,6 +4,7 @@
 vendor/bundle*
 .bundle*
 tmp/**/*
+/coverage/*
 
 # Local configuration
 config/database.yml

@@ -27,5 +27,6 @@ group :development, :test do
   gem 'launchy'
   gem 'rspec-rails'
   gem 'capybara'
+  gem 'simplecov', :require => false
 end
 
