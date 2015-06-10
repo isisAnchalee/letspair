@@ -27,5 +27,6 @@ group :development, :test do
   gem 'launchy'
   gem 'rspec-rails'
   gem 'capybara'
+  gem 'factory_girl_rails'
 end
 
