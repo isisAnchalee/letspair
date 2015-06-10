@@ -14,6 +14,7 @@
 
 class Project < ActiveRecord::Base
   validates :title, :user_id, :description, :complexity, presence: true
+  validates :title, :description, length: { minimum: 2 }
   
   belongs_to(
     :author,
