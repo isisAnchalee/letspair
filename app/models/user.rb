@@ -4,8 +4,6 @@
 #
 #  id                     :integer          not null, primary key
 #  username               :string           not null
-#  first_name             :string           not null
-#  last_name              :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  email                  :string           default(""), not null
