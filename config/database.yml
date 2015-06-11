@@ -9,7 +9,7 @@ development:
   
 test:
   <<: *default
-  database: test_letspair
+  database: travis_ci_test
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
