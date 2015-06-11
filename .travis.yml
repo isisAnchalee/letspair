@@ -1,3 +1,6 @@
 language: ruby
 rvm:
   - 2.2.1
+before-script:
+  - "rake db:reset RAILS_ENV=test"
+  - "rake test:all RAILS_ENV=test"
