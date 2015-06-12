@@ -1,5 +1,7 @@
 language: ruby
 rvm:
   - 2.2.1
+addons:
+  postgresql: "9.3"
 before_install:
   - psql -c 'create database travic_ci_test;' -U postgres
