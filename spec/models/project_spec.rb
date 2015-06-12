@@ -39,5 +39,12 @@ RSpec.describe Project, type: :model do
       review = FactoryGirl.create(:review, project_id: project.id)
       expect(project.review).to eq(review)
     end
+    
+    it "has many bids" do
+      project = FactoryGirl.create(:project)
+      bid1 = FactoryGirl.create(:bid, project_id: project.id)
+      bid2 = FactoryGirl.create(:bid, project_id: project.id)
+      expect(project.bids).to eq([bid1, bid2])
+    end
   end
 end

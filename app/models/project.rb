@@ -16,13 +16,9 @@ class Project < ActiveRecord::Base
   validates :title, :user_id, :description, :complexity, presence: true
   validates :title, :description, length: { minimum: 2 }
   
-  belongs_to(
-    :author,
-    :class_name => "User",
-    :foreign_key => :user_id,
-    :primary_key => :id
-  )
+  belongs_to :author, foreign_key: :user_id, class_name: "User"
   has_one :review
+  has_many :bids
 
  def price_dollars
     self.price.to_f / 100
