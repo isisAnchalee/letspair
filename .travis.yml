@@ -5,4 +5,5 @@ addons:
   postgresql: "9.3"
 before_install:
   - psql -c 'create database travic_ci_test;' -U postgres
+before_script:
   - rake db:reset
