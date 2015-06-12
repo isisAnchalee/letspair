@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   attr_accessor :login
 
   has_many :projects, dependent: :destroy
-  has_many :bids
+  has_many :bids, foreign_key: :bidder_id
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
