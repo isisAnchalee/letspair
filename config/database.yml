@@ -6,6 +6,10 @@ default: &default
 development:
   <<: *default
   database: letspair
+  
+test:
+  <<: *default
+  database: test_letspair
 
 test:
   adapter: postgresql
