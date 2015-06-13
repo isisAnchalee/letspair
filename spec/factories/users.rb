@@ -30,8 +30,6 @@ FactoryGirl.define do
   
   factory :admin, class: User do
     username "Admin"
-    password "hellohello"
     admin true
   end
-  
 end
