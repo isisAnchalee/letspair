@@ -4,7 +4,4 @@ rvm:
 addons:
   postgresql: "9.3"
 before_install:
-  - psql -c 'create database travis_ci_test;' -U postgres
-before_script:
-  - rake db:test:prepare
-  - rake db:reset
+  - psql -c 'create database test_letspair;' -U postgres
