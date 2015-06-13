@@ -30,7 +30,16 @@ RSpec.describe Review, type: :model do
     it { should validate_numericality_of(:rating)
                     .is_greater_than_or_equal_to(0)
                     .is_less_than_or_equal_to(100)
-    }
+    }    
+    it "properly validates a correct review" do
+      review = Review.new(reviewer_id: 1, reviewed_id: 2, title: "Hello", body: "World", rating: 10, project_id: 1)
+      expect(review).to be_valid
+    end
+    
+    it "properly validates an incorrect review" do
+      review = Review.new(reviewer_id: 1, reviewed_id: 2, title: "Hello", body: "World", rating: 101, project_id: 1)
+      expect(review).to_not be_valid
+    end
   end
   
   context "associations" do
