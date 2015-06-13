@@ -14,13 +14,9 @@
 #
 
 class Review < ActiveRecord::Base
-  validates :reviewer_id, presence: true
-  validates :reviewed_id, presence: true
-  validates :project_id, presence: true
-  validates :rating, presence: true
-  validates :title, length: { minimum: 2 }
-  validates :body, length: { minimum: 2 }
-  
+  validates :reviewer_id, :reviewed_id, :project_id, :rating, :title, :body, presence: true
+  validates :title, :body, length: { minimum: 2 }
+
   belongs_to :reviewer, foreign_key: :reviewer_id, class_name: "User"
   belongs_to :reviewed, foreign_key: :reviewed_id, class_name: "User"
   belongs_to :project
