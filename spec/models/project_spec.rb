@@ -64,4 +64,13 @@ RSpec.describe Project, type: :model do
       expect(Bid.all.count).to eq(0)
     end
   end
+
+  context "methods" do
+
+    it "#price_in_dollars" do
+      project = FactoryGirl.create(:project)
+      project.price_in_dollars = 30
+      expect(project.price_in_dollars).to eq(30)
+    end
+  end
 end
