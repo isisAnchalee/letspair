@@ -11,7 +11,6 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 gem 'slim-rails', '~> 3.0.1'
-gem 'faker'
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
 gem 'acts-as-taggable-on'
@@ -26,6 +25,7 @@ group :development, :test do
   gem 'annotate'
   gem 'launchy'
   gem 'rspec-rails'
+  gem 'faker'
   gem 'capybara'
   gem 'factory_girl_rails'
   gem 'simplecov', :require => false
