@@ -19,7 +19,6 @@ RSpec.feature "User Registration", :type => :feature do
     fill_in 'Password', with: 'asswordpassword'
     fill_in 'Password confirmation', with: 'passwordpassword'
     click_button 'Sign up'
-    save_and_open_page
     expect(page).to have_content "Password confirmation doesn't match Password"
     expect(page).to have_content "Username can't be blank"
   end
