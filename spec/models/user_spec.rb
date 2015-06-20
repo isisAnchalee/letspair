@@ -52,13 +52,4 @@ RSpec.describe User, type: :model do
       expect(authenticated).to eq user
     end
   end
-
-  context "devise functions" do
-
-    it "#login" do
-      user = FactoryGirl.create(:user)
-      user.login = user.email
-      expect(user.login).to eq(user.email)
-    end
-  end
 end
