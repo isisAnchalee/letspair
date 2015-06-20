@@ -1,5 +1,6 @@
 require 'simplecov'
 SimpleCov.start
+<<<<<<< HEAD
 
 require 'capybara'
 require 'capybara/poltergeist'
@@ -8,6 +9,9 @@ Capybara.javascript_driver = :poltergeist
 Capybara.register_driver :poltergeist do |app|
   Capybara::Poltergeist::Driver.new(app, timeout: 15)
 end
+=======
+require 'capybara/rspec'
+>>>>>>> Added registration controller feature specs
 
 RSpec.configure do |config|
 
