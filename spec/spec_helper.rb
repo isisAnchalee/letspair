@@ -4,6 +4,8 @@ require 'capybara/rspec'
 
 RSpec.configure do |config|
 
+  Capybara.default_wait_time = 10
+
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
   end
