@@ -41,6 +41,7 @@ RSpec.describe User, type: :model do
   end
 
   context "associations" do
+
     it "has many projects" do
       user = FactoryGirl.create(:user)
       project1 = FactoryGirl.create(:project, user_id: user.id)
@@ -63,6 +64,16 @@ RSpec.describe User, type: :model do
       bid1 = FactoryGirl.create(:bid, bidder_id: user.id)
       bid2 = FactoryGirl.create(:bid, bidder_id: user.id)
       expect(user.bids).to eq([bid1, bid2])
+    end
+  end
+
+  context "devise" do
+
+    it "can find user by email" do
+      user = FactoryGirl.create(:user)
+      warden_conditions = { email: user.email.upcase! }
+      authenticated = User.find_for_database_authentication(warden_conditions)
+      expect(authenticated).to eq user
     end
   end
 end
