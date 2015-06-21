@@ -42,6 +42,23 @@ RSpec.describe User, type: :model do
     it { should have_many(:projects).dependent(:destroy) }
     it { should have_many :bids }
   end
+  
+    it "has many projects" do
+      user = FactoryGirl.create(:user)
+      project1 = FactoryGirl.create(:project, user_id: user.id)
+      project2 = FactoryGirl.create(:project, user_id: user.id)
+      expect(user.projects).to eq([project1, project2])
+    end
+
+  context "devise" do
+
+    it "can find user by email" do
+      user = FactoryGirl.create(:user)
+      warden_conditions = { email: user.email.upcase! }
+      authenticated = User.find_for_database_authentication(warden_conditions)
+      expect(authenticated).to eq user
+    end
+  end
 
   context "devise" do
 
