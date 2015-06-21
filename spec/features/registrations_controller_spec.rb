@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.feature "User Registration", :type => :feature do
 
   scenario 'User signs up with valid credentials' do
-    Capybara.default_wait_time = 15
+    Capybara.default_max_wait_time = 15
     visit '/users/sign_up'
     fill_in 'Username', with: 'dannnnneh'
     fill_in 'Email', with: 'test@example.com'
@@ -14,7 +14,7 @@ RSpec.feature "User Registration", :type => :feature do
   end
 
   scenario 'User signs up with invalid credentials' do
-    Capybara.default_wait_time = 15
+    Capybara.default_max_wait_time = 15
     visit '/users/sign_up'
     fill_in 'Username', with: ''
     fill_in 'Email', with: 'test@co.m'
