@@ -4,6 +4,9 @@ RSpec.feature "User Registration", :type => :feature do
 
   scenario 'User signs up with valid credentials' do
     visit '/users/sign_up'
+
+    expect(current_path).to eq '/users/sign_up'
+
     fill_in 'Username', with: 'dannnnneh'
     fill_in 'Email', with: 'test@example.com'
     fill_in 'Password', with: 'passwordpassword'
