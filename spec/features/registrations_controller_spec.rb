@@ -6,6 +6,7 @@ RSpec.feature "User Registration", :type => :feature do
     visit '/users/sign_up'
 
     expect(current_path).to eq '/users/sign_up'
+    puts page.html
 
     fill_in 'Username', with: 'dannnnneh'
     fill_in 'Email', with: 'test@example.com'
