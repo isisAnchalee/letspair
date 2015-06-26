@@ -28,6 +28,9 @@ ActiveRecord::Migration.maintain_test_schema!
 RSpec.configure do |config|
 
   Capybara.default_wait_time = 10
+  Capybara.register_driver :poltergeist do |app|
+    Capybara::Poltergeist::Driver.new(app, timeout: 15)
+  end
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
