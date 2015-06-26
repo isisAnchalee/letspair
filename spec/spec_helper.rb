@@ -1,10 +1,16 @@
 require 'simplecov'
 SimpleCov.start
-require 'capybara/rspec'
+
+
+require 'capybara'
+require 'capybara/poltergeist'
+
+Capybara.javascript_driver = :poltergeist
+Capybara.register_driver :poltergeist do |app|
+  Capybara::Poltergeist::Driver.new(app, timeout: 15)
+end
 
 RSpec.configure do |config|
-
-  Capybara.default_wait_time = 10
 
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
