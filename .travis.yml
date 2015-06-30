@@ -7,5 +7,3 @@ before_install:
   - psql -c 'create database test_letspair;' -U postgres
 before_script:
   - rake db:reset
-script:
-  - xvfb-run --server-args="-screen 0 1024x768x24" bundle exec rspec spec/features/*.rb
