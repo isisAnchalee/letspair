@@ -124,24 +124,15 @@ GEM
     orm_adapter (0.5.0)
     pg (0.18.2)
     poltergeist (1.6.0)
-<<<<<<< HEAD
-    poltergeist (1.5.1)
-=======
->>>>>>> Updated specs to use shoulda-matchers gem
       capybara (~> 2.1)
       cliver (~> 0.3.1)
       multi_json (~> 1.0)
       websocket-driver (>= 0.2.0)
-<<<<<<< HEAD
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
     rack (1.6.4)
-    rack (1.6.1)
-=======
-    rack (1.6.4)
->>>>>>> Updated specs to use shoulda-matchers gem
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.1)
@@ -170,7 +161,6 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
     rdoc (4.2.0)
-      json (~> 1.4)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
     rspec-core (3.3.1)
@@ -191,7 +181,7 @@ GEM
       rspec-support (~> 3.3.0)
     rspec-support (3.3.0)
     sass (3.4.15)
-    sass-rails (5.0.2)
+    sass-rails (5.0.3)
       railties (>= 4.0.0, < 5.0)
       sass (~> 3.1)
       sprockets (>= 2.8, < 4.0)
@@ -247,10 +237,6 @@ GEM
     websocket-driver (0.5.4)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
-<<<<<<< HEAD
-    websocket-driver (0.3.5)
-=======
->>>>>>> Updated specs to use shoulda-matchers gem
     xpath (2.0.0)
       nokogiri (~> 1.3)
 
