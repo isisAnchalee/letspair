@@ -18,36 +18,25 @@ require 'rails_helper'
 RSpec.describe Review, type: :model do
   
   context "validation" do
-    
-    it "properly validates a correct review" do
-      review = Review.new(reviewer_id: 1, reviewed_id: 2, title: "Hello", body: "World", rating: 10, project_id: 1)
-      expect(review).to be_valid
-    end
-    
-    it "properly validates an incorrect review" do
-      review = Review.new(reviewer_id: 1, reviewed_id: 2, title: "Hello", body: "World", rating: 101, project_id: 1)
-      expect(review).to_not be_valid
-    end
+    before { FactoryGirl.create(:review) }
+    it { should validate_presence_of :reviewer_id }
+    it { should validate_presence_of :reviewed_id }
+    it { should validate_presence_of :project_id }
+    it { should validate_presence_of :rating }
+    it { should validate_presence_of :title }
+    it { should validate_presence_of :body }
+    it { should validate_length_of(:title).is_at_least(2) }
+    it { should validate_length_of(:body).is_at_least(2) }
+    it { should validate_numericality_of(:rating)
+                    .is_greater_than_or_equal_to(0)
+                    .is_less_than_or_equal_to(100)
+    }
   end
   
   context "associations" do
-    
-    it "has a reviewer" do
-      reviewer = FactoryGirl.create(:user)
-      review = FactoryGirl.create(:review, reviewer_id: reviewer.id)
-      expect(review.reviewer).to eq(reviewer)
-    end
-    
-    it "has a reviewee" do
-      reviewed = FactoryGirl.create(:user)
-      review = FactoryGirl.create(:review, reviewed_id: reviewed.id)
-      expect(review.reviewed).to eq(reviewed)
-    end
-    
-    it "has a project" do
-      project = FactoryGirl.create(:project)
-      review = FactoryGirl.create(:review, project_id: project.id)
-      expect(review.project).to eq(project)
-    end
+    before { FactoryGirl.create(:review) }
+    it { should belong_to :reviewer }
+    it { should belong_to :reviewed }
+    it { should belong_to :project }
   end
 end
