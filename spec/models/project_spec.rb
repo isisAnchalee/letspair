@@ -40,7 +40,6 @@ RSpec.describe Project, type: :model do
   end
   
   context "associations" do
-<<<<<<< HEAD
     before { FactoryGirl.create(:project) }
     it { should belong_to :author }
     it { should have_one(:review).dependent(:destroy) }
@@ -48,10 +47,6 @@ RSpec.describe Project, type: :model do
   end
 
   context "methods" do
-
-    it "#price_in_dollars" do
-=======
-    
     it "belongs to an author" do
       user = FactoryGirl.create(:user)
       project = FactoryGirl.create(:project, user_id: user.id)
@@ -73,7 +68,6 @@ RSpec.describe Project, type: :model do
     end
     
     it "has many bids" do
->>>>>>> Added review rating validation
       project = FactoryGirl.create(:project)
       project.price_in_dollars = 30
       expect(project.price_in_dollars).to eq(30)
@@ -87,10 +81,10 @@ RSpec.describe Project, type: :model do
       project.destroy
       expect(Bid.all.count).to eq(0)
     end
+
   end
 
   context "methods" do
-
     it "#price_in_dollars" do
       project = FactoryGirl.create(:project)
       project.price_in_dollars = 30
