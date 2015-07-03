@@ -51,17 +51,6 @@ RSpec.describe User, type: :model do
     end
 
   context "devise" do
-
-    it "can find user by email" do
-      user = FactoryGirl.create(:user)
-      warden_conditions = { email: user.email.upcase! }
-      authenticated = User.find_for_database_authentication(warden_conditions)
-      expect(authenticated).to eq user
-    end
-  end
-
-  context "devise" do
-
     it "can find user by email" do
       user = FactoryGirl.create(:user)
       warden_conditions = { email: user.email.upcase! }
