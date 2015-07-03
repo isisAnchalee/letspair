@@ -16,7 +16,7 @@ class Project < ActiveRecord::Base
 
   attr_accessor :price
 
-  validates :title, :user_id, :description, :complexity, presence: true
+  validates :title, :user_id, :description, :complexity, :price, presence: true
   validates :title, :description, length: { minimum: 2 }
   
   belongs_to :author, foreign_key: :user_id, class_name: "User"
