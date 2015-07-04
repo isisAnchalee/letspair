@@ -9,7 +9,7 @@ RSpec.feature "User Registration", :type => :feature do
     fill_in 'Password', with: 'passwordpassword'
     fill_in 'Password confirmation', with: 'passwordpassword'
     click_button 'Sign up'
-    expect(page).to have_content 'Sign Out'
+    expect(page).to have_button 'Sign Out'
   end
 
   scenario 'User signs up with invalid credentials' do
