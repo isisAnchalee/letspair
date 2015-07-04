@@ -28,41 +28,26 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
 
   context "validations" do
-
-    it "properly validates a correct user" do
-      user = User.new(username: "Danny", email: "danny@danny.com", password: "dannydanny")
-      expect(user).to be_valid
-    end
-
-    it "properly validates an incorrect user" do
-      user = User.new(username: "d", email: "d", password: "d")
-      expect(user).to_not be_valid
-    end
+    before { FactoryGirl.create(:user) }
+    it { should validate_presence_of :username }
+    it { should validate_presence_of :email }
+    it { should validate_uniqueness_of(:username).case_insensitive }
+    it { should validate_uniqueness_of(:email).case_insensitive }
   end
 
   context "associations" do
-    it "has many projects" do
-      user = FactoryGirl.create(:user)
-      project1 = FactoryGirl.create(:project, user_id: user.id)
-      project2 = FactoryGirl.create(:project, user_id: user.id)
-      expect(user.projects).to eq([project1, project2])
-    end
+    before { FactoryGirl.create(:user) }
+    it { should have_many(:projects).dependent(:destroy) }
+    it { should have_many :bids }
+  end
 
-    it "destroyes projects when user is deleted" do
-      user = FactoryGirl.create(:user)
-      project1 = FactoryGirl.create(:project, user_id: user.id)
-      project2 = FactoryGirl.create(:project, user_id: user.id)
-      expect(user.projects).to eq([project1, project2])
-      expect(Project.all.count).to eq(2)
-      user.destroy
-      expect(Project.all.count).to eq(0)
-    end
+  context "devise" do
 
-    it "has many bids" do
+    it "can find user by email" do
       user = FactoryGirl.create(:user)
-      bid1 = FactoryGirl.create(:bid, bidder_id: user.id)
-      bid2 = FactoryGirl.create(:bid, bidder_id: user.id)
-      expect(user.bids).to eq([bid1, bid2])
+      warden_conditions = { email: user.email.upcase! }
+      authenticated = User.find_for_database_authentication(warden_conditions)
+      expect(authenticated).to eq user
     end
   end
 end

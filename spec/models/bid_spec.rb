@@ -15,30 +15,16 @@ require 'rails_helper'
 
 RSpec.describe Bid, type: :model do
   context "validations" do
-    
-    it "properly validates a correct bid" do
-      bid = Bid.new(project_id: 1, price: 1, bidder_id: 1, content: "Bla")
-      expect(bid).to be_valid
-    end
-    
-    it "properly validates an incorrect bid" do
-      bid = Bid.new(project_id: 1, price: 1, bidder_id: 1, content: "")
-      expect(bid).to_not be_valid
-    end
+    before { FactoryGirl.create(:bid) }
+    it { should validate_presence_of :project_id }
+    it { should validate_presence_of :price }
+    it { should validate_presence_of :bidder_id }
+    it { should validate_presence_of :content }
   end
   
   context "associations" do
-    
-    it "has a project" do
-      project = FactoryGirl.create(:project)
-      bid = FactoryGirl.create(:bid, project_id: project.id)
-      expect(bid.project).to eq(project)
-    end
-    
-    it "has a bidder" do
-      bidder = FactoryGirl.create(:user)
-      bid = FactoryGirl.create(:bid, bidder_id: bidder.id)
-      expect(bid.bidder).to eq(bidder)
-    end
+    before { FactoryGirl.create(:bid) }
+    it { should belong_to :project }
+    it { should belong_to :bidder }
   end
 end

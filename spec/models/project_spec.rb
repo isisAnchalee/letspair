@@ -14,54 +14,29 @@ require 'rails_helper'
 RSpec.describe Project, type: :model do
   
   context "validation" do
-    
-    it "properly validates a correct project" do
-      project = Project.new(title: "Something", description: "Meh", user_id: 1, complexity: 10, price: 10)
-      expect(project).to be_valid
-    end
-    
-    it "properly validates an incorrect project" do
-      project = Project.new(title: "Something", description: "", user_id: 1, complexity: 10, price: 10)
-      expect(project).to_not be_valid
-    end
+    before { FactoryGirl.create(:project) }
+    it { should validate_presence_of :title }
+    it { should validate_presence_of :user_id }
+    it { should validate_presence_of :description }
+    it { should validate_presence_of :complexity }
+    it { should validate_presence_of :price }
+    it { should validate_length_of(:title).is_at_least(2) }
+    it { should validate_length_of(:description).is_at_least(2) }
   end
   
   context "associations" do
-    
-    it "belongs to an author" do
-      user = FactoryGirl.create(:user)
-      project = FactoryGirl.create(:project, user_id: user.id)
-      expect(project.author).to eq(user)
-    end
-    
-    it "has one review" do
+    before { FactoryGirl.create(:project) }
+    it { should belong_to :author }
+    it { should have_one(:review).dependent(:destroy) }
+    it { should have_many(:bids).dependent(:destroy) }
+  end
+
+  context "methods" do
+
+    it "#price_in_dollars" do
       project = FactoryGirl.create(:project)
-      review = FactoryGirl.create(:review, project_id: project.id)
-      expect(project.review).to eq(review)
-    end
-    
-    it "deletes its review when destroyed" do
-      project = FactoryGirl.create(:project)
-      review = FactoryGirl.create(:review, project_id: project.id)
-      expect(Review.all.count).to eq(1)
-      project.destroy
-      expect(Review.all.count).to eq(0)
-    end
-    
-    it "has many bids" do
-      project = FactoryGirl.create(:project)
-      bid1 = FactoryGirl.create(:bid, project_id: project.id)
-      bid2 = FactoryGirl.create(:bid, project_id: project.id)
-      expect(project.bids).to eq([bid1, bid2])
-    end
-    
-    it "deletes its bids when destroyed" do
-      project = FactoryGirl.create(:project)
-      bid1 = FactoryGirl.create(:bid, project_id: project.id)
-      bid2 = FactoryGirl.create(:bid, project_id: project.id)
-      expect(Bid.all.count).to eq(2)
-      project.destroy
-      expect(Bid.all.count).to eq(0)
+      project.price_in_dollars = 30
+      expect(project.price_in_dollars).to eq(30)
     end
   end
 end
