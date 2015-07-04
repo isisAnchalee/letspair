@@ -21,6 +21,8 @@
 #  confirmation_sent_at   :datetime
 #  unconfirmed_email      :string
 #  admin                  :boolean          default(FALSE)
+#  provider               :string
+#  uid                    :string
 #
 
 class User < ActiveRecord::Base
@@ -32,8 +34,9 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable,
-         :authentication_keys => [:login]
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable,
+         :authentication_keys => [:login],
+         :omniauth_providers => [:facebook]
 
   validates :username,
             :presence => true,
@@ -65,6 +68,24 @@ class User < ActiveRecord::Base
     else
       conditions[:email].downcase! if conditions[:email]
       where(conditions.to_hash).first
+    end
+  end
+
+  # Devise
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email
+      user.username
+      user.password = Devise.friendly_token[0,20]
+    end
+  end
+
+  # Devise
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
+        user.email = data["email"] if user.email.blank?
+      end
     end
   end
 end

@@ -15,6 +15,7 @@ gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
 gem 'acts-as-taggable-on'
 gem 'poltergeist'
+gem 'omniauth-facebook'
 
 group :development, :test do
   gem 'byebug'
