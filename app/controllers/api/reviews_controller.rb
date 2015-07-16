@@ -3,7 +3,8 @@ module Api
     # before_action :require_signed_in!
 
     def index
-      @reviews = Review.all.includes(:reviewer, :reviewee, :project)
+      @project = Project.find(params[:project_id])
+      @reviews = @project.reviews.includes(:reviewer, :reviewee)
       render :index
     end
 
@@ -15,7 +16,7 @@ module Api
     def create
       @review = Review.new(review_params)
       @review.reviewer_id = current_user.id
-      @review.reviewee_id = Project.find(params[:project_id]).user_id
+      @review.reviewed_id = Project.find(params[:project_id]).user_id
       @review.save!
       redirect_to root_url
     end
