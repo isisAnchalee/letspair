@@ -19,6 +19,15 @@ module Api
       redirect_to root_url
     end
 
+    def update
+      @project = Project.find(params[:id])
+      if @project.update_attributes(project_params)
+        render :show
+      else
+        render json: { error: @project.errors.full_messages }
+      end
+    end
+
     def show
       @project = Project.find(params[:id])
       render :show
