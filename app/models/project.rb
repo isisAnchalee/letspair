@@ -41,7 +41,6 @@ class Project < ActiveRecord::Base
   has_one :review, dependent: :destroy
   has_many :bids, dependent: :destroy
 
-
   def price_in_dollars
     self.price.to_f / 100
   end

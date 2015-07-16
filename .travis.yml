@@ -7,4 +7,3 @@ before_install:
   - psql -c 'create database test_letspair;' -U postgres
 before_script:
   - rake db:reset
-  - rake db:migrate
