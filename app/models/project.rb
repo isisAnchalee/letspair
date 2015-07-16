@@ -14,6 +14,24 @@
 
 class Project < ActiveRecord::Base
 
+  ONE_MONTH                  = 0
+  THREE_MONTH                = 1
+  FOUR_TO_TWELVE_MONTH       = 2
+  ONE_YEAR                   = 3
+  PART_TIME                  = 4
+  FULL_TIME                  = 5
+  NEGOTIABLE                 = 6
+
+  TIME_LINES = {
+    ONE_MONTH                => "1 month",
+    THREE_MONTH              => "3 month",
+    FOUR_TO_TWELVE_MONTH     => "4-12 month",
+    ONE_YEAR                 => "1 year",
+    PART_TIME                => "part time",
+    FULL_TIME                => "full time",
+    NEGOTIABLE               => "negotiable"
+  }
+
   attr_accessor :price
 
   validates :title, :user_id, :description, :complexity, :price, presence: true
