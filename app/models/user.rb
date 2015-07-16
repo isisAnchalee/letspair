@@ -40,7 +40,10 @@ class User < ActiveRecord::Base
   has_many :in_reviews, foreign_key: :reviewee_id, class_name: 'Review'
   has_many :out_reviews, foreign_key: :reviewer_id, class_name: 'Review'
   has_many :reviewers, through: :in_reviews, source: :reviewer
-  
+  has_many :reviewed_pojects, through: :out_reviews, source: :reviewed
+
+  has_one :profile
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
