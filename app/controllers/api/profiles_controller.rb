@@ -15,7 +15,7 @@ module Api
     end
 
     def update
-      @user = User.find(params[:user_id])
+      @user = current_user
       @profile = @user.profile
       if @profile.update_attributes(profile_params)
         render :show
