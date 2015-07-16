@@ -11,7 +11,7 @@ class AddProfileToUsers < ActiveRecord::Migration
       t.timestamps null:false
     end
 
-    add_column :users, :profile_id, :integer
-    add_index :users, :profile_id
+    add_index :profiles, :user_id
+    add_index :profiles, :email
   end
 end
