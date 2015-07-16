@@ -29,6 +29,12 @@ class User < ActiveRecord::Base
   has_many :projects, dependent: :destroy
   has_many :bids, foreign_key: :bidder_id
   
+  has_many :out_follows, foreign_key: :follower_id, class_name: 'Follow'
+  has_many :in_follows, foreign_key: :followee_id, class_name: 'Follow'
+  has_many :followers, through: :in_follows, source: :follower
+  has_many :followed_users, through: :out_follows, source: :followee
+  has_many :followed_projects, through: :followed_users, source: :projects
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
