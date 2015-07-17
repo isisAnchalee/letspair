@@ -1,4 +1,4 @@
-module Api
+module API
   class FollowsController < ApiController
     respond_to :json
     

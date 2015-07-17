@@ -1,4 +1,4 @@
-module Api
+module API
   class ProfilesController < ApiController
     # before_action :require_signed_in!
     # before_action :ensure_current_user, only: [:new, :update, :create]

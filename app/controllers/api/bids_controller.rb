@@ -1,4 +1,4 @@
-module Api
+module API
   class BidsController < ApiController
     # before_action :require_signed_in!
 
