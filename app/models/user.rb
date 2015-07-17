@@ -42,7 +42,8 @@ class User < ActiveRecord::Base
   has_many :reviewers, through: :in_reviews, source: :reviewer
   has_many :reviewed_pojects, through: :out_reviews, source: :reviewed
 
-  has_one :profile
+  has_one :user_profile
+  has_one :company_profile
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -81,5 +82,9 @@ class User < ActiveRecord::Base
       conditions[:email].downcase! if conditions[:email]
       where(conditions.to_hash).first
     end
+  end
+
+  def profile
+    company_profile || user_profile
   end
 end

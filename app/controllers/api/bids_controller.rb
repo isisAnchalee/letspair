@@ -21,7 +21,7 @@ module API
 
     def update
       @bid = Bid.find(params[:id])
-      if @bid.update_attributes(bid_params)
+      if @bid.update(bid_params)
         render :show
       else
         render json: { error: @bid.errors.full_messages }

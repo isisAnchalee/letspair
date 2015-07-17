@@ -1,6 +1,6 @@
 module API
   class FollowsController < ApiController
-    respond_to :json
+    # respond_to :json
     
     before_action :require_signed_in!
 

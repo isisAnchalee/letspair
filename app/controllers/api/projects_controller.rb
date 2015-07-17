@@ -21,7 +21,7 @@ module API
 
     def update
       @project = Project.find(params[:id])
-      if @project.update_attributes(project_params)
+      if @project.update(project_params)
         render :show
       else
         render json: { error: @project.errors.full_messages }
