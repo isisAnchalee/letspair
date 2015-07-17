@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: projects
+#
+#  id          :integer          not null, primary key
+#  title       :string           not null
+#  description :text             not null
+#  created_at  :datetime
+#  updated_at  :datetime
+#  user_id     :integer
+#  complexity  :integer
+#  price       :integer
+#  time_line   :integer          not null
+#
+
 require 'rails_helper'
 
 # Table name: projects

@@ -1,3 +1,5 @@
+# == Schema Information
+#
 # Table name: projects
 #
 #  id          :integer          not null, primary key
@@ -8,6 +10,8 @@
 #  user_id     :integer
 #  complexity  :integer
 #  price       :integer
+#  time_line   :integer          not null
+#
 
 
 FactoryGirl.define do
@@ -17,5 +21,6 @@ FactoryGirl.define do
     complexity 10
     price 10
     user_id 1
+    time_line 1
   end
 end

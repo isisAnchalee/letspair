@@ -21,6 +21,8 @@
 #  confirmation_sent_at   :datetime
 #  unconfirmed_email      :string
 #  admin                  :boolean          default(FALSE)
+#  provider               :string
+#  uid                    :string
 #
 
 require 'rails_helper'
