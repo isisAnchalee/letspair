@@ -3,7 +3,6 @@
 # Table name: users
 #
 #  id                     :integer          not null, primary key
-#  username               :string           not null
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  email                  :string           default(""), not null
@@ -23,6 +22,7 @@
 #  admin                  :boolean          default(FALSE)
 #  provider               :string
 #  uid                    :string
+#  name                   :string           not null
 #
 
 class User < ActiveRecord::Base
@@ -51,17 +51,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :authentication_keys => [:login]
 
-  validates :username,
-            :presence => true,
-            :uniqueness => {
-                :case_sensitive => false
-            }
-  validates :email,
-            :presence => true,
-            :uniqueness => {
-                :case_sensitive => false
-            }
-
+  validates :name, :email, presence: true, uniqueness: { case_sensitive: false }
 
   # Devise
   def login=(login)
