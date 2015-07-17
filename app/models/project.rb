@@ -10,6 +10,7 @@
 #  user_id     :integer
 #  complexity  :integer
 #  price       :integer
+#  time_line   :integer          not null
 #
 
 class Project < ActiveRecord::Base
