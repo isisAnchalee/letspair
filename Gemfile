@@ -18,6 +18,7 @@ gem 'poltergeist'
 
 group :development, :test do
   gem 'byebug'
+  gem 'pry'
   gem 'binding_of_caller'
   gem 'better_errors'
   gem 'web-console', '~> 2.0'
