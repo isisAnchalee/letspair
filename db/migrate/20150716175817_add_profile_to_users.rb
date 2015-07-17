@@ -1,6 +1,6 @@
 class AddProfileToUsers < ActiveRecord::Migration
   def change
-    create_table(:profiles) do |t|
+    create_table(:user_profiles) do |t|
       t.string :first_name, null: false
       t.string :last_name, null: false
       t.string :email, null: false
@@ -11,7 +11,7 @@ class AddProfileToUsers < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :profiles, :user_id
-    add_index :profiles, :email
+    add_index :user_profiles, :user_id
+    add_index :user_profiles, :email
   end
 end
