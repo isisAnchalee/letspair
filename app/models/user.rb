@@ -22,7 +22,9 @@
 #  admin                  :boolean          default(FALSE)
 #  provider               :string
 #  uid                    :string
-#  name                   :string           not null
+#  first_name             :string           not null
+#  last_name              :string           not null
+#  is_company             :boolean          not null
 #
 
 class User < ActiveRecord::Base
@@ -51,7 +53,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :authentication_keys => [:login]
 
-  validates :name, :email, presence: true, uniqueness: { case_sensitive: false }
+  validates_presence_of :first_name, :last_name, :email
 
   # Devise
   def login=(login)
@@ -60,7 +62,7 @@ class User < ActiveRecord::Base
 
   # Devise
   def login
-    @login || self.username || self.email
+    @login || self.email
   end
 
   # Devise

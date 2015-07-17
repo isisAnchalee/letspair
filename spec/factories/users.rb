@@ -22,19 +22,34 @@
 #  admin                  :boolean          default(FALSE)
 #  provider               :string
 #  uid                    :string
-#  name                   :string           not null
+#  first_name             :string           not null
+#  last_name              :string           not null
+#  is_company             :boolean          not null
 #
 
 FactoryGirl.define do
   factory :user do
-    name "Danneh"
+    first_name "Danneh"
+    last_name "Burt"
     email "danneh@danneh.danneh"
+    password "hellohello"
+    is_company false
+    admin false
+  end
+
+  factory :company, class: User do
+    first_name "Company"
+    last_name "A"
+    is_company true
+    email "A@Company.com"
     password "hellohello"
     admin false
   end
   
   factory :admin, class: User do
-    name "Admin"
+    first_name "Admin"
+    last_name "Admin"
+    is_company false
     admin true
   end
 end
