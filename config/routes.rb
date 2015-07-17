@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
 
-   namespace :api, :defaults => { :format => :json } do
+   namespace :api, path: '/', constraints: { subdomain: 'api' }, defaults: { format: :json } do
       resources :users, only: [:show, :update, :destroy] do 
         resource :follow, only: [:create, :destroy]
       end
