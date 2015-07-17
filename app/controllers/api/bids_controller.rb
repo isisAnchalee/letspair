@@ -40,6 +40,7 @@ module API
     end
 
     private
+
     def bid_params
       params.require(:bid).permit(:price, :content, :project_id)
     end

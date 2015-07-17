@@ -3,7 +3,6 @@
 # Table name: users
 #
 #  id                     :integer          not null, primary key
-#  username               :string           not null
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  email                  :string           default(""), not null
@@ -23,6 +22,7 @@
 #  admin                  :boolean          default(FALSE)
 #  provider               :string
 #  uid                    :string
+#  name                   :string           not null
 #
 
 require 'rails_helper'
@@ -31,9 +31,9 @@ RSpec.describe User, type: :model do
 
   context "validations" do
     before { FactoryGirl.create(:user) }
-    it { should validate_presence_of :username }
+    it { should validate_presence_of :name }
     it { should validate_presence_of :email }
-    it { should validate_uniqueness_of(:username).case_insensitive }
+    it { should validate_uniqueness_of(:name).case_insensitive }
     it { should validate_uniqueness_of(:email).case_insensitive }
   end
 
