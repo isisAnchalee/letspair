@@ -5,10 +5,14 @@ Rails.application.routes.draw do
 
    namespace :api, path: '/', constraints: { subdomain: 'api' }, defaults: { format: :json } do
       resources :users, only: [:show, :update, :destroy] do 
+        resources :profiles, except: :destroy
         resource :follow, only: [:create, :destroy]
+        resources :reviews
       end
 
-      resources :projects, only: [:index, :new, :create, :show, :destroy]
+      resources :projects, only: [:index, :new, :create, :show, :destroy] do
+        resources :bids
+      end
     end
 
   resources :projects
