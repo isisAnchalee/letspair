@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150612052244) do
+ActiveRecord::Schema.define(version: 20150716165123) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,10 +33,12 @@ ActiveRecord::Schema.define(version: 20150612052244) do
     t.integer  "user_id"
     t.integer  "complexity"
     t.integer  "price"
+    t.integer  "time_line",   null: false
   end
 
   add_index "projects", ["complexity"], name: "index_projects_on_complexity", using: :btree
   add_index "projects", ["price"], name: "index_projects_on_price", using: :btree
+  add_index "projects", ["time_line"], name: "index_projects_on_time_line", using: :btree
   add_index "projects", ["title"], name: "index_projects_on_title", using: :btree
   add_index "projects", ["user_id"], name: "index_projects_on_user_id", using: :btree
 
@@ -90,6 +92,8 @@ ActiveRecord::Schema.define(version: 20150612052244) do
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
     t.boolean  "admin",                  default: false
+    t.string   "provider"
+    t.string   "uid"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

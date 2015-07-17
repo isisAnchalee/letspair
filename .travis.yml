@@ -6,4 +6,5 @@ addons:
 before_install:
   - psql -c 'create database travis_ci_test;' -U postgres
 before_script:
+  - rake db:migrate
   - rake db:reset
