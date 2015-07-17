@@ -3,7 +3,7 @@ module Api
     # before_action :require_signed_in!
 
     def index
-      @reviews = Review.all.includes(:reviewer, :reviewee, :project :project)
+      @reviews = Review.all.includes(:reviewer, :reviewee, :project)
       render :index
     end
 

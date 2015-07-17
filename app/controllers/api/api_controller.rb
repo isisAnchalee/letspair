@@ -1,5 +1,5 @@
 module Api
-  class ApiController < ActionController
+  class ApiController < ApplicationController
     #before_action :require_sign_in!
 
   end
