@@ -20,9 +20,9 @@
 #  confirmation_sent_at   :datetime
 #  unconfirmed_email      :string
 #  admin                  :boolean          default(FALSE)
-#  provider               :string
-#  uid                    :string
-#  name                   :string           not null
+#  first_name             :string           not null
+#  last_name              :string           not null
+#  is_company             :boolean          default(FALSE)
 #
 
 class User < ActiveRecord::Base
@@ -51,7 +51,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :authentication_keys => [:login]
 
-  validates :name, :email, presence: true, uniqueness: { case_sensitive: false }
+  validates_presence_of :first_name, :last_name, :email
 
   # Devise
   def login=(login)
@@ -60,14 +60,14 @@ class User < ActiveRecord::Base
 
   # Devise
   def login
-    @login || self.username || self.email
+    @login || self.email
   end
 
-  # Devise
+  Devise
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)
-      where(conditions.to_hash).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
+      where(conditions.to_hash).where(["lower(email) = :value", { :value => login.downcase }]).first
     else
       conditions[:email].downcase! if conditions[:email]
       where(conditions.to_hash).first
