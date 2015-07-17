@@ -8,7 +8,7 @@ class AddProfileToUsers < ActiveRecord::Migration
       t.string :short_tag_line
       t.text :description
       t.text :work_history
-      t.timestamps null:false
+      t.timestamps
     end
 
     add_index :profiles, :user_id
