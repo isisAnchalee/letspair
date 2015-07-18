@@ -1,6 +1,5 @@
 module API
   class UserProfilesController < ApiController
-    # before_action :require_signed_in!
     # before_action :ensure_current_user, only: [:new, :update, :create]
     # before_action :ensure_user_has_user_profile, except: :show
 

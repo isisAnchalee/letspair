@@ -1,6 +1,5 @@
 module API
   class ProjectsController < ApiController
-    # before_action :require_signed_in!
 
     def index
       @projects = Project.all.includes(:author)

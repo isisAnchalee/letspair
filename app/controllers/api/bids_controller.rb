@@ -1,6 +1,5 @@
 module API
   class BidsController < ApiController
-    # before_action :require_signed_in!
 
     def index
       @project = Project.find(params[:project_id])

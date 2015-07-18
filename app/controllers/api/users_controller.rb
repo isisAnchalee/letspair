@@ -1,8 +1,16 @@
 module API
   class UsersController < ApiController
-    #before_action :require_current_user!
-    #before_action :require_sign_in!
-    
+
+    def users_index
+      @users = User.consultants.include(:user_profile)
+      render :index
+    end
+
+    def companies_index
+      @users = User.companies.include(:company_profile)
+      render :index
+    end
+
     def update
       if current_user == User.find(params[:id])
         @user = current_user

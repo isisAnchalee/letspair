@@ -1,8 +1,5 @@
 module API
-  class FollowsController < ApiController
-    # respond_to :json
-    
-    before_action :require_signed_in!
+  class FollowsController < ApiController    
 
     def create
       user = User.find(params[:user_id])
