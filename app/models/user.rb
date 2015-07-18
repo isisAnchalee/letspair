@@ -53,14 +53,12 @@ class User < ActiveRecord::Base
 
   validates_presence_of :first_name, :last_name, :email
 
-  # Devise
-  def login=(login)
-    @login = login
-  end
+  scope :consultants, -> { where(is_company: false) }
+  scope :companies, -> { where(is_company: true) }
 
   # Devise
   def login
-    @login || self.email
+    self.email
   end
 
   Devise

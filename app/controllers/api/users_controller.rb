@@ -1,19 +1,21 @@
 module API
   class UsersController < ApiController
+    #before_action :require_current_user!
+    #before_action :require_sign_in!
+    
     def update
       if current_user == User.find(params[:id])
         @user = current_user
-        if @user.update_attributes(user_params)
+        if @user.update(user_params)
           render :show
         else
-          render json: @user.errors.full_messages
+          render json: { error: @user.errors.full_messages }
         end
       end
-      render :edit
     end
 
     def show
-      @user = current_user
+      @user = User.find(params[:id])
       @profile = @user.profile
       render :show
     end

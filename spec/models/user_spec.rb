@@ -20,11 +20,9 @@
 #  confirmation_sent_at   :datetime
 #  unconfirmed_email      :string
 #  admin                  :boolean          default(FALSE)
-#  provider               :string
-#  uid                    :string
 #  first_name             :string           not null
 #  last_name              :string           not null
-#  is_company             :boolean          not null
+#  is_company             :boolean          default(FALSE)
 #
 
 require 'rails_helper'
@@ -43,14 +41,23 @@ RSpec.describe User, type: :model do
     before { FactoryGirl.create(:user) }
     it { should have_many(:projects).dependent(:destroy) }
     it { should have_many :bids }
+    it { should have_one :user_profile }
+    it { should have_one :company_profile }
   end
-  
-    it "has many projects" do
+
+  context "methods" do
+    it "User has a user profile" do
       user = FactoryGirl.create(:user)
-      project1 = FactoryGirl.create(:project, user_id: user.id)
-      project2 = FactoryGirl.create(:project, user_id: user.id)
-      expect(user.projects).to eq([project1, project2])
+      profile = FactoryGirl.create(:user_profile, user_id: user.id)
+      expect(user.profile).to eq(profile)
     end
+
+    it "User has a company profile" do
+      user = FactoryGirl.create(:user)
+      profile = FactoryGirl.create(:company_profile, user_id: user.id)
+      expect(user.profile).to eq(profile)
+    end
+  end
 
   context "devise" do
     it "can find user by email" do

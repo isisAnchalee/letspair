@@ -20,11 +20,9 @@
 #  confirmation_sent_at   :datetime
 #  unconfirmed_email      :string
 #  admin                  :boolean          default(FALSE)
-#  provider               :string
-#  uid                    :string
 #  first_name             :string           not null
 #  last_name              :string           not null
-#  is_company             :boolean          not null
+#  is_company             :boolean          default(FALSE)
 #
 
 FactoryGirl.define do

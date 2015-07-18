@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150717222807) do
+ActiveRecord::Schema.define(version: 20150718011644) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,27 +25,21 @@ ActiveRecord::Schema.define(version: 20150717222807) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "profiles", force: :cascade do |t|
-    t.string   "first_name",     null: false
-    t.string   "last_name",      null: false
-    t.string   "email",          null: false
-    t.integer  "user_id",        null: false
-    t.string   "short_tag_line"
-    t.text     "description"
-    t.text     "work_history"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "company_profiles", force: :cascade do |t|
+    t.string  "name",        null: false
+    t.text    "description", null: false
+    t.string  "location"
+    t.integer "user_id",     null: false
   end
 
-  add_index "profiles", ["email"], name: "index_profiles_on_email", using: :btree
-  add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
+  add_index "company_profiles", ["name"], name: "index_company_profiles_on_name", using: :btree
 
   create_table "projects", force: :cascade do |t|
     t.string   "title",       null: false
     t.text     "description", null: false
+    t.integer  "user_id",     null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id"
     t.integer  "complexity"
     t.integer  "price"
     t.integer  "time_line",   null: false
@@ -88,6 +82,17 @@ ActiveRecord::Schema.define(version: 20150717222807) do
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
+  create_table "user_profiles", force: :cascade do |t|
+    t.integer  "user_id",        null: false
+    t.string   "short_tag_line"
+    t.text     "description"
+    t.text     "work_history"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_profiles", ["user_id"], name: "index_user_profiles_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
@@ -106,8 +111,6 @@ ActiveRecord::Schema.define(version: 20150717222807) do
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
     t.boolean  "admin",                  default: false
-    t.string   "provider"
-    t.string   "uid"
     t.string   "first_name",                             null: false
     t.string   "last_name",                              null: false
     t.boolean  "is_company",             default: false

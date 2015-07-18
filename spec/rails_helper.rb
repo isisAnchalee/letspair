@@ -5,11 +5,13 @@ require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
 require 'capybara'
 
-require 'capybara/poltergeist'
-Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new(app, timeout: 15)
-end
-Capybara.javascript_driver = :poltergeist
+
+# TODO: Uncomment when frontend is built
+# require 'capybara/poltergeist'
+# Capybara.register_driver :poltergeist do |app|
+#   Capybara::Poltergeist::Driver.new(app, timeout: 15)
+# end
+# Capybara.javascript_driver = :poltergeist
 
 # Add additional requires below this line. Rails is not loaded until this point!
 

@@ -21,10 +21,8 @@ module API
       if @profile.update(user_profile_params)
         render :show
       else
-        render json: { error: @profile.errors.full_messages }
+        render { error: @profile.errors.full_messages }
       end
-      #should decide later what to render/redirect
-      redirect_to root_url
     end
 
     def show
