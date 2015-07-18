@@ -1,7 +1,5 @@
 module API
   class UserProfilesController < ApiController
-    # before_action :ensure_current_user, only: [:new, :update, :create]
-    # before_action :ensure_user_has_user_profile, except: :show
 
     def new
       @profile = UserProfile.new
@@ -20,12 +18,12 @@ module API
       if @profile.update(user_profile_params)
         render :show
       else
-        render { error: @profile.errors.full_messages }
+        render json: { error: @profile.errors.full_messages }
       end
     end
 
     def show
-      @profile = UserProfile.find(params[:id])
+      @profile = UserProfile.find(params[:user_id])
       render :show
     end
 

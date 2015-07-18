@@ -17,7 +17,7 @@ module API
         if @user.update(user_params)
           render :show
         else
-          render json: { error: @user.errors.full_messages }
+          render json: { errors: @user.errors.full_messages }
         end
       end
     end

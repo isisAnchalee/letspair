@@ -3,9 +3,13 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
 
-   namespace :api, path: '/', constraints: { subdomain: 'api' }, defaults: { format: :json } do
+# to add still:
+# path: '/', constraints: { subdomain: 'api' }
+
+   namespace :api, defaults: { format: :json } do
       resources :users, only: [:show, :update, :destroy] do 
-        resources :profiles, except: :destroy
+        resource :user_profile, except: :destroy
+        resource :company_profile, except: :destroy
         resource :follow, only: [:create, :destroy]
         resources :reviews
       end

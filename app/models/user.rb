@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
   attr_accessor :login
 
   has_many :projects, dependent: :destroy
-  has_many :bids, foreign_key: :bidder_id
+  has_many :bids, foreign_key: :bidder_id, dependent: :destroy
 
   has_many :out_follows, foreign_key: :follower_id, class_name: 'Follow'
   has_many :in_follows, foreign_key: :followee_id, class_name: 'Follow'
@@ -42,8 +42,8 @@ class User < ActiveRecord::Base
   has_many :reviewers, through: :in_reviews, source: :reviewer
   has_many :reviewed_pojects, through: :out_reviews, source: :reviewed
 
-  has_one :user_profile
-  has_one :company_profile
+  has_one :user_profile, dependent: :destroy
+  has_one :company_profile, dependent: :destroy
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -74,5 +74,4 @@ class User < ActiveRecord::Base
   def profile
     company_profile || user_profile
   end
-
 end
