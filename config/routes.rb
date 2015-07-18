@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       resources :users, only: [:show, :update, :destroy] do 
         resource :user_profile, except: :destroy
         resource :company_profile, except: :destroy
+        resources :projects, only: [:index, :create, :show, :update, :destroy]
         resource :follow, only: [:create, :destroy]
         resources :reviews
       end
