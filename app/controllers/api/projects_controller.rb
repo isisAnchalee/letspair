@@ -1,5 +1,6 @@
 module API
   class ProjectsController < ApiController
+    before_filter -> { validate_user params[:user_id] }, only: [:create, :update, :destroy]
 
     def index
       @projects = Project.all.includes(:author)

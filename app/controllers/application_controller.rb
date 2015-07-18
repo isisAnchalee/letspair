@@ -11,7 +11,11 @@ class ApplicationController < ActionController::Base
   end
 
   def require_signed_in!
-    redirect_to new_session_url unless signed_in?
+    redirect_to new_user_session_url unless signed_in?
+  end
+
+  def validate_user!(id)
+    current_user.id == id
   end
 
   def configure_permitted_parameters

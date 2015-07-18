@@ -61,7 +61,6 @@ class User < ActiveRecord::Base
     self.email
   end
 
-  Devise
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)
@@ -75,4 +74,5 @@ class User < ActiveRecord::Base
   def profile
     company_profile || user_profile
   end
+
 end

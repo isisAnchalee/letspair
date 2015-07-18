@@ -35,7 +35,7 @@ class Project < ActiveRecord::Base
 
   attr_accessor :price
 
-  validates :title, :user_id, :description, :complexity, :price, presence: true
+  validates :title, :user_id, :description, :complexity, :price, :time_line, presence: true
   attr_accessor :price
 
   validates :title, :user_id, :description, :complexity, :price, presence: true

@@ -30,5 +30,5 @@ class UserProfile < ActiveRecord::Base
 
   def email
     user.email
-  ends
+  end
 end
