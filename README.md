@@ -10,4 +10,6 @@ Go to project directory and run `rake db:create db:migrate`
 
 To view the app locally go to [http://localhost.com:3000](http://localhost.com:3000)
 
+## Model Structures
 
+![](/doc/models_complete.svg)

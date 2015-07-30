@@ -33,5 +33,6 @@ group :development, :test do
   gem 'simplecov', :require => false
   gem 'simplecov-rcov', require: false
   gem 'shoulda-matchers'
+  gem 'railroady'
 end
 
