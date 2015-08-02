@@ -8,8 +8,10 @@ This is a platform to connect freelance tech consultants / independent contracto
 
 Go to project directory and run `rake db:create db:migrate`
 
-To view the app locally go to [http://localhost.com:3000](http://localhost.com:3000)
+Start a server locally `rails s`
 
-## Model Structures
+To view the app go to [http://localhost.com:3000](http://localhost.com:3000)
+
+## Internal Data Structures
 
 ![](/doc/models_complete.svg)
