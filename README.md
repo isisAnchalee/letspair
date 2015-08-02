@@ -46,4 +46,8 @@ Currently, reviews only have a `title`, `body`, and a `rating`.
 Tags are very important for finding appropriate consultants, or for finding appropriate projects.
 The `name` is searchable, and the `taggings_count` will show which tags are popular, and therefore help Users choose better tags.
 
+### Follows
+
+A user may follow another user or project through the `Follows` join table.
+
 ![](/models.png)
