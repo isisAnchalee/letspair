@@ -41,6 +41,6 @@ Currently, reviews only have a `title`, `body` for text, and a `rating`.
 
 `Tag` models can belong to Users or Projects through the `Taggings` join table. A Tag has a `name` and a `taggings_count`.
 Tags are very important for finding appropriate consultants, or for finding appropriate projects.
-The `name` is searchable, and the `taggings_count` will show which tags are popular, and therefore help Users choose better tags. 
+The `name` is searchable, and the `taggings_count` will show which tags are popular, and therefore help Users choose better tags.
 
-![](/doc/models_complete.svg)
+![](/models.png)
