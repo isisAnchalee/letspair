@@ -1,15 +1,20 @@
+require 'api_constraints'
+
 Rails.application.routes.draw do
   devise_for :users, controllers: {
     sessions: 'users/sessions'
   }
 
-   namespace :api, :defaults => { :format => :json } do
+# add later: constraints: { subdomain: 'api' }, path: '/'
+   namespace :api, defaults: { format: 'json' } do
+    scope module: :v1, constraints: ApiConstraints.new(version: 1) do
       resources :users, only: [:show, :update, :destroy] do 
         resource :follow, only: [:create, :destroy]
       end
 
       resources :projects, only: [:index, :new, :create, :show, :destroy]
     end
+  end
 
   resources :projects
   root to: "static_pages#home"
