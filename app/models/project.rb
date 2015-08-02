@@ -5,9 +5,9 @@
 #  id          :integer          not null, primary key
 #  title       :string           not null
 #  description :text             not null
+#  user_id     :integer          not null
 #  created_at  :datetime
 #  updated_at  :datetime
-#  user_id     :integer
 #  complexity  :integer
 #  price       :integer
 #  time_line   :integer          not null
@@ -35,12 +35,16 @@ class Project < ActiveRecord::Base
 
   attr_accessor :price
 
+  validates :title, :user_id, :description, :complexity, :price, :time_line, presence: true
+  attr_accessor :price
+
   validates :title, :user_id, :description, :complexity, :price, presence: true
   validates :title, :description, length: { minimum: 2 }
   
   belongs_to :author, foreign_key: :user_id, class_name: "User"
   has_one :review, dependent: :destroy
   has_many :bids, dependent: :destroy
+
 
   def price_in_dollars
     self.price.to_f / 100

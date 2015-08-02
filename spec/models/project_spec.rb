@@ -5,9 +5,9 @@
 #  id          :integer          not null, primary key
 #  title       :string           not null
 #  description :text             not null
+#  user_id     :integer          not null
 #  created_at  :datetime
 #  updated_at  :datetime
-#  user_id     :integer
 #  complexity  :integer
 #  price       :integer
 #  time_line   :integer          not null
@@ -47,7 +47,44 @@ RSpec.describe Project, type: :model do
   end
 
   context "methods" do
+    it "belongs to an author" do
+      user = FactoryGirl.create(:user)
+      project = FactoryGirl.create(:project, user_id: user.id)
+      expect(project.author).to eq(user)
+    end
+    
+    it "has one review" do
+      project = FactoryGirl.create(:project)
+      review = FactoryGirl.create(:review, project_id: project.id)
+      expect(project.review).to eq(review)
+    end
+    
+    it "deletes its review when destroyed" do
+      project = FactoryGirl.create(:project)
+      review = FactoryGirl.create(:review, project_id: project.id)
+      expect(Review.all.count).to eq(1)
+      project.destroy
+      expect(Review.all.count).to eq(0)
+    end
+    
+    it "has many bids" do
+      project = FactoryGirl.create(:project)
+      project.price_in_dollars = 30
+      expect(project.price_in_dollars).to eq(30)
+    end
+    
+    it "deletes its bids when destroyed" do
+      project = FactoryGirl.create(:project)
+      bid1 = FactoryGirl.create(:bid, project_id: project.id)
+      bid2 = FactoryGirl.create(:bid, project_id: project.id)
+      expect(Bid.all.count).to eq(2)
+      project.destroy
+      expect(Bid.all.count).to eq(0)
+    end
 
+  end
+
+  context "methods" do
     it "#price_in_dollars" do
       project = FactoryGirl.create(:project)
       project.price_in_dollars = 30

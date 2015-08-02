@@ -1,6 +1,6 @@
-module Api
+module API
   class ProjectsController < ApiController
-    # before_action :require_signed_in!
+    before_filter -> { validate_user params[:user_id] }, only: [:create, :update, :destroy]
 
     def index
       @projects = Project.all.includes(:author)
@@ -17,6 +17,15 @@ module Api
       @project.user_id = current_user.id
       @project.save!
       redirect_to root_url
+    end
+
+    def update
+      @project = Project.find(params[:id])
+      if @project.update(project_params)
+        render :show
+      else
+        render json: { error: @project.errors.full_messages }
+      end
     end
 
     def show
