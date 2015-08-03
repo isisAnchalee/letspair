@@ -10,10 +10,10 @@
 #  updated_at    :datetime
 #
 
-class Follow < ActiveRecord::Base
-  validates_uniqueness_of :follower_id, scope: [:followed_id, :followed_type]
-  validates_presence_of :followed_id, :followed_type, :follower_id
-
-  belongs_to :followed, polymorphic: true
-  belongs_to :follower, class_name: "User"
+FactoryGirl.define do
+  factory :follow do
+    followed_id 0
+    followed_type "None"
+    follower_id 0
+  end
 end
