@@ -3,6 +3,6 @@ p meeow!!
 - @projects.each do |project|
   ul
     li = "Title: " + project.title
-    li = "Author: " + project.author.username
+    li = "Author: " + project.author.first_name
     li = "Complexity: " + "#{project.complexity}"
     li = "Description: " + project.description

@@ -19,6 +19,7 @@ gem 'omniauth-facebook'
 
 group :development, :test do
   gem 'byebug'
+  gem 'pry'
   gem 'binding_of_caller'
   gem 'better_errors'
   gem 'web-console', '~> 2.0'
@@ -33,5 +34,6 @@ group :development, :test do
   gem 'simplecov', :require => false
   gem 'simplecov-rcov', require: false
   gem 'shoulda-matchers'
+  gem 'railroady'
 end
 

@@ -3,7 +3,6 @@
 # Table name: users
 #
 #  id                     :integer          not null, primary key
-#  username               :string           not null
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  email                  :string           default(""), not null
@@ -21,6 +20,9 @@
 #  confirmation_sent_at   :datetime
 #  unconfirmed_email      :string
 #  admin                  :boolean          default(FALSE)
+#  first_name             :string           not null
+#  last_name              :string           not null
+#  is_company             :boolean          default(FALSE)
 #  provider               :string
 #  uid                    :string
 #
@@ -28,7 +30,6 @@
 # Table name: users
 #
 #  id                     :integer          not null, primary key
-#  username               :string           not null
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  email                  :string           default(""), not null
@@ -46,17 +47,34 @@
 #  confirmation_sent_at   :datetime
 #  unconfirmed_email      :string
 #  admin                  :boolean          default(FALSE)
+#  first_name             :string           not null
+#  last_name              :string           not null
+#  is_company             :boolean          default(FALSE)
+#
 
 FactoryGirl.define do
   factory :user do
-    username "Danneh"
+    first_name "Danneh"
+    last_name "Burt"
     email "danneh@danneh.danneh"
+    password "hellohello"
+    is_company false
+    admin false
+  end
+
+  factory :company, class: User do
+    first_name "Company"
+    last_name "A"
+    is_company true
+    email "A@Company.com"
     password "hellohello"
     admin false
   end
   
   factory :admin, class: User do
-    username "Admin"
+    first_name "Admin"
+    last_name "Admin"
+    is_company false
     admin true
   end
 end
