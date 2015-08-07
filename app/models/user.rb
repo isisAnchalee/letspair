@@ -23,8 +23,6 @@
 #  first_name             :string           not null
 #  last_name              :string           not null
 #  is_company             :boolean          default(FALSE)
-#  provider               :string
-#  uid                    :string
 #
 
 class User < ActiveRecord::Base
@@ -46,6 +44,8 @@ class User < ActiveRecord::Base
 
   has_one :user_profile, dependent: :destroy
   has_one :company_profile, dependent: :destroy
+
+  has_many :identities, dependent: :destroy
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

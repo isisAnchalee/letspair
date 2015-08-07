@@ -23,8 +23,6 @@
 #  first_name             :string           not null
 #  last_name              :string           not null
 #  is_company             :boolean          default(FALSE)
-#  provider               :string
-#  uid                    :string
 #
 
 require 'rails_helper'
@@ -42,6 +40,7 @@ RSpec.describe User, type: :model do
   context "associations" do
     before { FactoryGirl.create(:user) }
     it { should have_many(:projects).dependent(:destroy) }
+    it { should have_many(:identities).dependent(:destroy) }
     it { should have_many :bids }
     it { should have_one :user_profile }
     it { should have_one :company_profile }
