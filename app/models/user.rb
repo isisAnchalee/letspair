@@ -50,8 +50,8 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :omniauthable
-         # :omniauth_providers => [:facebook]
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable,
+         :omniauth_providers => [:facebook, :linkedin]
 
   validates_presence_of :first_name, :last_name, :email
   validates_uniqueness_of :email, case_sensitive: false
@@ -86,9 +86,8 @@ class User < ActiveRecord::Base
       # Create the user if it's a new registration
       if user.nil?
         user = User.new(
-            first_name: auth.extra.raw_info.first_name,
-            last_name: auth.extra.raw_info.last_name,
-            #username: auth.info.nickname || auth.uid,
+            first_name: auth.info.first_name,
+            last_name: auth.info.last_name,
             email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
             password: Devise.friendly_token[0,20]
         )

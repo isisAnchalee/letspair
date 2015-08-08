@@ -15,7 +15,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     }
   end
 
-  [:facebook, :linked_in].each do |provider|
+  [:facebook, :linkedin].each do |provider|
     provides_callback_for provider
   end
 
@@ -25,5 +25,30 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     else
       finish_signup_path(resource)
     end
+  end
+
+  def finish_signup
+    # authorize! :update, @user
+    @user = User.find(params[:id])
+    debugger
+    if request.patch? && params[:user] #&& params[:user][:email]
+      if @user.update(user_params)
+
+        # @user.skip_reconfirmation!
+        sign_in(@user, :bypass => true)
+        redirect_to root_url #@user, notice: 'Your profile was successfully updated.'
+      else
+        # TODO: Does not actually show errors yet
+        @show_errors = true
+      end
+    end
+  end
+
+  private
+
+  def user_params
+    accessible = [ :name, :email ] # extend with your own params
+    accessible << [ :password, :password_confirmation ] unless params[:user][:password].blank?
+    params.require(:user).permit(accessible)
   end
 end
