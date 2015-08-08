@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :users, :controllers => { omniauth_callbacks: 'users/omniauth_callbacks' }
+  devise_for :users, :controllers => {
+    omniauth_callbacks: 'users/omniauth_callbacks',
+    sessions: 'users/sessions'
+  }
 
    namespace :api, defaults: { format: :json } do
       resources :users, only: [:show, :update, :destroy] do 
