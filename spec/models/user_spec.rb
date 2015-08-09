@@ -27,6 +27,18 @@
 
 require 'rails_helper'
 
+class Auth
+  attr_accessor :uid, :provider, :info
+
+  class Info
+    attr_accessor :email, :verified, :verified_email, :first_name, :last_name
+  end
+
+  def initialize
+    self.info = Info.new
+  end
+end
+
 RSpec.describe User, type: :model do
 
   context "validations" do
@@ -40,6 +52,7 @@ RSpec.describe User, type: :model do
   context "associations" do
     before { FactoryGirl.create(:user) }
     it { should have_many(:projects).dependent(:destroy) }
+    it { should have_many(:identities).dependent(:destroy) }
     it { should have_many :bids }
     it { should have_one :user_profile }
     it { should have_one :company_profile }
@@ -60,11 +73,46 @@ RSpec.describe User, type: :model do
   end
 
   context "devise" do
-    it "can find user by email" do
+    it "#find_for_auth can find a user through an identity" do
       user = FactoryGirl.create(:user)
-      warden_conditions = { email: user.email.upcase! }
-      authenticated = User.find_for_database_authentication(warden_conditions)
-      expect(authenticated).to eq user
+      auth = Auth.new
+      auth.uid = 5
+      auth.provider = "me"
+      FactoryGirl.create(:identity, user_id: user.id, uid: auth.uid, provider: auth.provider)
+
+      expect(User.find_for_oauth(auth)).to eq(user)
+    end
+
+    it "#find_for_auth can create an identity for a user" do
+      user = FactoryGirl.create(:user, email: "me@me.com")
+      auth = Auth.new
+      auth.uid = 5
+      auth.provider = "me"
+      auth.info.email = "me@me.com"
+      auth.info.verified = true
+      auth.info.verified_email = true
+
+      expect(User.find_for_oauth(auth)).to eq(user)
+    end
+
+    it "#find_for_auth creates a user" do
+      auth = Auth.new
+      auth.uid = 5
+      auth.provider = "me"
+      auth.info.email = "me@me.com"
+      auth.info.verified = true
+      auth.info.verified_email = true
+      auth.info.first_name = "danny"
+      auth.info.last_name = "bz"
+
+      expect(User.all.count).to eq(0)
+      User.find_for_oauth(auth)
+      expect(User.all.count).to eq(1)
+    end
+
+    it "#email_verified? returns true for email addresses" do
+      user = FactoryGirl.create(:user, email: "me@me.mememe")
+      expect(user.email_verified?).to eq(true)
     end
   end
 end

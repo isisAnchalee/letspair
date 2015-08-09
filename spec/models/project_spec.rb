@@ -15,17 +15,6 @@
 
 require 'rails_helper'
 
-# Table name: projects
-#
-#  id          :integer          not null, primary key
-#  title       :string           not null
-#  description :text             not null
-#  created_at  :datetime
-#  updated_at  :datetime
-#  user_id     :integer
-#  complexity  :integer
-#  price       :integer
-
 RSpec.describe Project, type: :model do
   
   context "validation" do
@@ -85,9 +74,15 @@ RSpec.describe Project, type: :model do
   end
 
   context "methods" do
-    it "#price_in_dollars" do
+    it "#price_in_dollars sets the price" do
       project = FactoryGirl.create(:project)
       project.price_in_dollars = 30
+      expect(project.price).to eq(3000)
+    end
+
+    it "#price_in_dollars gets the price" do
+      project = FactoryGirl.create(:project)
+      project.price = 3000
       expect(project.price_in_dollars).to eq(30)
     end
   end

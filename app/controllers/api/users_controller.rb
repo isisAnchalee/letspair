@@ -12,12 +12,15 @@ module API
     end
 
     def update
-      if current_user == User.find(params[:id])
-        @user = current_user
+      # authorize! :update, @user
+      respond_to do |format|
         if @user.update(user_params)
-          render :show
+          sign_in(@user == current_user ? @user : current_user, :bypass => true)
+          format.html { redirect_to @user, notice: 'Your profile was successfully updated.' }
+          format.json { head :no_content }
         else
-          render json: { errors: @user.errors.full_messages }
+          format.html { render action: 'edit' }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
         end
       end
     end
@@ -29,14 +32,24 @@ module API
     end
 
     def destroy
-      current_user.destroy if current_user == User.find(params[:id])
-      redirect_to root_url
+      # authorize! :delete, @user
+      @user.destroy
+      respond_to do |format|
+        format.html { redirect_to root_url }
+        format.json { head :no_content }
+      end
     end
 
+
     private
+    def set_user
+      @user = User.find(params[:id])
+    end
 
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :email)
+      accessible = [ :first_name, :last_name, :email ] # extend with your own params
+      accessible << [ :password, :password_confirmation ] unless params[:user][:password].blank?
+      params.require(:user).permit(accessible)
     end
   end
 end
