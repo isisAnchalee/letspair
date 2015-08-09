@@ -108,23 +108,8 @@ class User < ActiveRecord::Base
     self.email && self.email !~ TEMP_EMAIL_REGEX
   end
 
-
   def profile
     company_profile || user_profile
-  end
-
-  def login
-    self.email
-  end
-
-  def self.find_for_database_authentication(warden_conditions)
-    conditions = warden_conditions.dup
-    if login = conditions.delete(:email)
-      where(conditions.to_hash).where(["lower(email) = :value", { :value => login.downcase }]).first
-    else
-      conditions[:email].downcase! if conditions[:email]
-      where(conditions.to_hash).first
-    end
   end
 
 end
