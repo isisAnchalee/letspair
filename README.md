@@ -58,5 +58,6 @@ The `name` is searchable, and the `taggings_count` will show which tags are popu
 ### Follows
 
 A user may follow another user or project through the `Follows` join table.
+There is a followable concern included in `Users` and `Projects`.
 
 ![](/models.png)
