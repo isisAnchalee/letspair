@@ -30,7 +30,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def finish_signup
     # authorize! :update, @user
     @user = User.find(params[:id])
-    debugger
     if request.patch? && params[:user] #&& params[:user][:email]
       if @user.update(user_params)
 

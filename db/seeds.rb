@@ -5,7 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-danny = User.where(first_name: "Danny", last_name: "Burt", email: "Danny@Danny.com").first_or_create!(password: "passwordpassword")
+danny = User.where(first_name: "Danny", last_name: "Burt", email: "danny@danny.com").first_or_create!(password: "dannydanny")
 isis = User.where(first_name: "Isis", last_name: "Anchalee", email: "Isis@isis.com", admin: true, is_company: true).first_or_create!(password: "passwordpassword")
 rando = User.where(first_name: "Rando", last_name: "Yup", email: "u@asdfis.com", is_company: true).first_or_create!(password: "passwordpassword")
 
