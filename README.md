@@ -15,10 +15,19 @@ To view the app go to [http://localhost.com:3000](http://localhost.com:3000)
 ## Internal Data Structures
 
 ### Users
+
 Everyone who uses the platform is a User model.
 The user model has [devise auth](https://github.com/plataformatec/devise) attributes along with attributes for a users name,
 `email`, and a flag `is_company` denoting a company looking for consultants.
 There is also an admin flag.
+
+#### Identity
+
+This platform uses omni auth, and supports logging in through email, Facebook, or LinkedIn.
+The `Identity` model allows a single user to log in via email, Facebook, or LinkedIn
+by keeping track of the `uid` and `provider` returned by omniauth. The `Identity` model also has a `user_id` model
+to keep track of which user it belongs to, and a user `has_many` identities.
+
 
 ###There are two different types of profiles for Users. There is a `User Profile` model, and a `Company Profile`:
 
